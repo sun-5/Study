@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+<script src="https://unpkg.com/vue-router@3.3.4/dist/vue-router.js"></script>
+    <style>
+        .header{
+            width: 100%;
+            height: 80px;
+            background-color: rgb(212, 171, 34);
+        }
+        h1{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            display: flex;
+            margin: 0;
+            padding: 0;
+            height: 600px;
+            width: 100%;
+        }
+        .left{
+            background-color: dodgerblue;
+            flex: 2;
+            
+        }
+        .main{
+            background-color: lightcoral;
+            flex: 8;
+             
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="app">
+        <router-view></router-view>
+        <div class="container">
+        <router-view name='left'></router-view>
+        <router-view name='main'></router-view>
+        </div>
+    </div>
+    <script>
+
+        var header = {
+            template:'<h1 class="header">Header头部区域</h1>'
+        }
+
+        var leftBox = {
+            template:'<h1 class="left">Left侧边栏区域</h1>'
+        }
+
+        var mainBox = {
+            template:'<h1 class="main">Main主体区域</h1>'
+        }
+
+        //创建路由对象
+        var router = new VueRouter({
+            routes:[
+                // {path:'/',component:header},
+                // {path:'/left',component:leftBox},
+                // {path:'/main',component:mainBox},
+
+
+                {
+                    path:'/',
+                    components:{
+                        'default':header,
+                        'left':leftBox,
+                        main:mainBox
+                    }
+                },
+      
+
+
+            ]
+        })
+
+
+
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{},
+           router
+        });
+    </script>
+</body>
+
+</html>

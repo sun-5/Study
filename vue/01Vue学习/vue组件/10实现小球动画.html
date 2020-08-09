@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="https://lib.baomitu.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .ball{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #a14;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="button" @click='flag=!flag' value="小球动画">
+        <transition 
+        @before-enter='beforeEnter'
+        @enter='enter'
+        @after-enter='afterEnter'
+        >
+        <div class="ball" v-show='flag'>
+        </div>
+        </transition>
+    </div>
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{
+               flag: false
+           },
+           methods:{
+            beforeEnter(el){//小球初始位置
+                el.style.transform = 'translate(0,0)'
+            },
+            enter(el,done){ //小球结束位置
+                el.offsetLeft  //不加这个 就没有过渡效果
+                el.style.transform = 'translate(150px,450px)'
+                el.style.transition = 'all 0.6s ease'
+                done()
+            },
+            afterEnter(el){  //小球结束动画后的回调函数
+            //1.控制小秋 的显示与隐藏，
+            // 2.直接跳过 后半场动画，让flag标识符直接变为false
+            // 3.当第二次点击按钮，flag还是从 false => true 的 前半场动画
+                this.flag = !this.flag
+                // el.style.opacity =  0   不好重复使用
+                //Vue把一个完整的动画，使用钩子函数，拆分为了两部分
+                //我们使用flag标识符，来表示动画的切换
+                //刚开始flag=false  => 点击按钮后  flag=true => false
+            }
+           }
+        });
+    Vue.config.devtools = true
+    </script>
+</body>
+</html>

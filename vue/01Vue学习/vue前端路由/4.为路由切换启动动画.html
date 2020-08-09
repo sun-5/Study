@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+<!-- 1.安装vue-router路由模块 -->
+<script src="https://unpkg.com/vue-router@3.3.4/dist/vue-router.js"></script>
+<style>
+    /* 给选中路由高亮  改变类名的css*/
+    .router-link-active,.myactive{  
+        color:red; 
+        font-weight:800;
+        font-style: italic;
+        font-size: 20px;
+        text-shadow: aqua;
+    }
+    .v-enter,.v-leave-to{
+        opacity: 0;
+        transform: translateX(140px);
+    }
+    .v-enter-active,.v-leave-active{
+        transition: all 0.5s ease;
+    }
+</style>
+
+
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- router-link 默认渲染为a标签  tag指定标签类型-->
+        <router-link to='/login' tag='span'>登陆</router-link>
+        <router-link to='/register' tag='span'>注册</router-link>
+
+        <!-- vue-router提供的元素，专门用于当做 占位符 显示 路由规则 匹配到的 组件 -->
+    <transition mode='out-in'>
+        <router-view></router-view>
+    </transition>
+
+    </div>
+    <script>
+        // 组件模板对象
+        var login = {
+            template:'<h1>登录组件</h1>'
+        }
+
+        var register = {
+              template:'<h1>注册组件</h1>'
+          }
+        
+        // Vue.component('login',{  这种形式的组件名称不能在路由规则中使用
+        //     template:'<h1>登录组件</h1>'
+        // })
+
+        
+        // 2.创建一个路由对象，当导入路由包之后，在window全局对象中就有一个路由构造函数，VueRouter
+        var routerObj = new VueRouter({
+            //route 此配置对象中的 route 表示 【路由匹配规则】
+            routes:[//路由匹配规则
+            // 每个路由规则都是一个对象，必有两个属性：
+            // 属性1：path：表示监听哪个路由链接地址
+            // 属性2：component 表示如果路由是前面匹配到的path，则展示 component 属性对应的那个组件
+            {path:'/login',component:login},
+            //component 的属性必须是 组件模板对象，不能是 组件名称
+
+            {path:'/register',component:register},
+            {path:'/',redirect:'/login'}//这里的redirect和node中的两码事  重定向
+            ] ,
+            linkActiveClass:'myactive'  //自定义激活类名
+        })
+
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{},
+           router:routerObj  //将路由规则对象，注册到vm实例上，用来监听url地址变化，然后展示对应的组件
+        });
+    </script>
+</body>
+
+</html>

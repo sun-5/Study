@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H5标签</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            padding-bottom: 100px;
+        }
+
+        .div {
+            width: 100px;
+            height: 100px;
+        }
+
+        .div1 {
+            background: #f68
+        }
+
+        .div2 {
+            background: #f92;
+        }
+
+        .wrapper {
+            width: 500px;
+            height: 500px;
+            border: 5px solid #ccc
+        }
+
+        ul {
+            margin-left: 50px;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            width: 200px;
+            height: 30px;
+            margin: 10px;
+            background: #ccc;
+            text-align: center;
+            line-height: 30px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>视频 音频标签video audio</h2>
+    <audio src="0.mp3" controls preload="auto" loop controlsList="nodownload">真爱你的云</audio>
+    <video src="1.mp4" width="800" controls poster="2.jpg" controlsList="nodownload"></video>
+    <!-- 多类型资源 -->
+    <audio controls>
+        <source src="0.mp3" type="audio/mpeg">
+
+    </audio>
+    <button id="play">play</button>
+    <button id="pause">pause</button>
+    <button id="reload">reload</button>
+    <button id="up">+</button>
+    <button id="down">-</button>
+    <button id="quick">quick</button>
+    <button id="or">play/pause</button>
+
+    <script>
+        var audio = new Audio('0.mp3');
+        audio.controls = true;
+        audio.loop = 'loop';
+        //  audio.autoplay = true;
+        document.body.appendChild(audio);
+        window.onload = function () {
+            console.log(audio.currentSrc)
+            console.log(audio.duration)
+        }
+
+        /*play.onclick = function(){
+             audio.play();
+         }
+         pause.onclick = function(){
+             audio.pause();
+         }*/
+        reload.onclick = function () {
+            audio.load();
+            audio.autoplay = true;
+        }
+        audio.volume = 0.5
+        //audio.muted =  true  //静音
+        up.onclick = function () {
+            if (audio.volume <= 0.9) {
+                audio.volume += 0.1;
+
+            } else {
+                audio.volume = 1;
+            }
+            console.log(audio.volume)
+
+        }
+        down.onclick = function () {
+            if (audio.volume >= 0.1) {
+                audio.volume -= 0.1;
+            } else {
+                audio.volume = 0;
+            }
+        }
+
+        audio.currentTime = 100
+        quick.onclick = function () {
+            audio.currentTime += 10
+        }
+        //播放速度  audio.palybackrate
+        //已经播放过的时间段
+        // audio.played.start(0);audio.played.end(0);
+        //audio.played.start(1);audio.played.end(1);
+        //已经缓存的时间段
+        // audio.buffered.start(0);audio.buffered.end(0) 
+        //可以跳转的时间段
+        //audio.seekable.start(0)
+        //audio.seekable.end(0)
+        or.onclick = function () {
+            if (audio.paused) {
+                audio.play()
+            } else {
+                audio.pause()
+            }
+        }
+        audio.onseeking = function () {
+            console.log("在调到一个新的播放点")
+        }
+    </script>
+
+    <div style="height: 50px;width: 100%;background: #c8edff;"></div>
+
+    <h2>可拖拽drag元素</h2>
+    <div class="div1 div" id="item" draggable="true"></div>
+    <div class="div2 div" id="item2" draggable="true"></div>
+    <div class="wrapper"></div>
+    <script>
+        var wrapper = document.getElementsByClassName('wrapper')[0],
+            item = document.getElementById('item'),
+            item2 = document.getElementById('item2');
+        item.addEventListener('dragstart', function (e) {
+            e.dataTransfer.setData('data', this.id)
+
+        })
+        item2.addEventListener('dragstart', function (e) {
+            e.dataTransfer.setData('data', this.id)
+
+        })
+
+        // item.addEventListener('dragend',function(e){
+
+
+        // })
+        wrapper.addEventListener('dragenter', function () {
+
+
+        })
+        wrapper.addEventListener('dragover', function (e) {
+            e.preventDefault();
+
+        })
+        wrapper.addEventListener('drop', function (e) {
+            var data = e.dataTransfer.getData('data');
+            wrapper.appendChild(document.getElementById(data))
+        })
+    </script>
+    <div style="height: 50px;width: 100%;background: #24faef;"></div>
+    <h2>可拖拽drag元素demo</h2>
+    <ul>
+        <li draggable="true">1</li>
+        <li draggable="true">2</li>
+        <li draggable="true">3</li>
+        <li draggable="true">4</li>
+        <li draggable="true">5</li>
+    </ul>
+    <script>
+        var li = document.getElementsByTagName('li'),
+            ul = document.getElementsByTagName('ul')[0],
+            len = li.length;
+
+        function bindLiEvent() {
+            for (var i = 0; i< len; i++) {
+                li[i].addEventListener('dragstart', function (e) {
+                    var index = getIndex(this);
+                    e.dataTransfer.setData('data', index)
+                });
+                li[i].addEventListener('dragover', function (e) {
+                    e.preventDefault();
+                })
+                li[i].addEventListener('drop', function (e) {
+                    var i = e.dataTransfer.getData('data');
+                    console.log(i);
+                    ul.insertBefore(li[i], this);
+                })
+
+            }
+        }
+        function getIndex(dom){
+            for(var i=0;i<len;i++){
+                if(li[i]===dom){
+                    return i;
+                }
+            }
+        }
+        bindLiEvent();
+         
+        function removeLi(){
+            wrapper.addEventListener('dragover',function(e){
+                e.preventDefault();
+            })
+            wrapper.addEventListener('drop',function(e){
+                e.preventDefault();
+                // var index = e.dataTransfer.getData('data');
+                // li[index].remove();
+                var dt = e.dataTransfer;
+                console.log(dt);
+                var files = dt.files;
+                console.log(files);
+
+
+            })
+        }
+        removeLi();
+    </script>
+    <div style="height: 50px;width: 100%;background: #a16ffd;"></div>
+    <h2>使用拖拽上传文件</h2>
+</body>
+
+</html>

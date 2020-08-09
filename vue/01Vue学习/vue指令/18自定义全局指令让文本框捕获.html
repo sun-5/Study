@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+                <label>
+                    ID:<input type="text" class="form-control" v-model="id">
+                </label>
+                <label> 
+                    Name:<input type="text" class="form-control" v-model="name" @keyup.enter='add'>
+       
+                </label>
+
+               
+                <input type="button" value="添加" class="btn btn-primary" @click="add()">
+                <label for="">
+                    <!-- 文本框自动捕获 -->
+                    <!-- 注意：Vue中所有的指令，在调用时候都以 v- 开头 -->
+                    搜索名称关键字：<input type="text" class="form-control" v-model='keyword' id="search" v-focus>
+                </label>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        //使用 Vue.directive() 定义全局的指令
+        // 其中：参数1 指令的名称，定义指令名称时候不需要加v-，在调用时必须在指令名称前加v-
+        //      参数2，对象，对象身上有一些指令相关的钩子函数
+        Vue.directive('focus',{
+            bind:function(el){//当指令绑定到元素上时候，会立即执行bind函数，只执行一次
+                //在每个函数中，第一个参数，永远是el，表示被绑定指令的那个元素，这个el参数是原生js DOM对象
+                //在元素刚绑定了指令的时候，还没有插入到DOM中去，此时调用focus没有作用
+                //因为一个元素只有掺入DOM之后才能获取焦点
+                // el.focus()
+             },
+            inserted:function(el){//inserted 表示元素 插入到DOM中的时候，会执行inserted函数，触发一次
+                el.focus()
+            },
+            updated:function(){//当VNode更新的时候，会执行updated，可能会触发多次
+
+            }
+        })
+
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{},
+           filters:{}, //自定义私有过滤器
+           directives:{//自定义私有指令
+            'fontweight':{
+                bing:function(el,binding){
+                    el.style.fontWeight = binding.value
+                }
+            }
+           }
+
+        });
+    </script>
+</body>
+
+</html>

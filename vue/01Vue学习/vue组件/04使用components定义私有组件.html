@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="https://lib.baomitu.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app">
+       <my-Com3></my-Com3>
+       <login></login>
+    </div>
+
+    <div id="app2">
+        <my-Com3></my-Com3>
+        <login>2</login>
+        <add></add>
+     </div>
+
+    <template id='tmp'>
+       <div>
+        <h1>这是通过template元素，在外部定义的组件结构</h1>
+        <h4>好用</h4>
+    </div>
+    </template>
+
+    <template id='add'>
+        <div>
+         <h1>这是通过template元素，在app2内部定义的组件结构</h1>
+         <h4>好用</h4>
+     </div>
+     </template>
+
+    <script>
+        Vue.component('myCom3',{
+            template:'#tmp'
+        })
+
+
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{}
+        });
+
+        var vm2=new Vue({
+           el:'#app2',
+           data:{},
+           methods:{},
+           filters:{},
+           directives:{},
+           components:{//定义实例内部私有组件
+             login:{
+                 template:'<h1>这是私有的login组件</h1>'
+             },
+             add:{
+                 template:'#add'
+             }
+            },
+
+            beforeCreate(){},
+            created(){},
+            beforeMount(){},
+            mounted(){},
+            beforeUpdate(){},
+            updated(){},
+            beforeDestroy(){},
+            destroyed(){}
+        });
+
+    Vue.config.devtools = true
+    </script>
+</body>
+</html>

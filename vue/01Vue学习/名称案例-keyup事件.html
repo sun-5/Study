@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <pre>
+        分析：
+        1.监听到文本框数据改变，才知道什么时候去拼接一个fullName
+        2.如何监听到文本框数据改变？
+        3.keyup键盘抬起事件
+    </pre>
+    <div id="app">
+        
+    <input type="text" v-model='firstName' @keyup='getFullName'>+
+    <input type="text" v-model='lastName' @keyup='getFullName'> =
+    <input type="text" v-model='fullName'>
+
+    </div>
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{
+            firstName:'',
+            lastName:'',
+            fullName:''
+           },
+           methods:{
+            getFullName(){
+                this.fullName =  this.firstName + '-' + this.lastName
+            }
+           }
+        });
+    </script>
+</body>
+
+</html>

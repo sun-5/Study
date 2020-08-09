@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .clearfix::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .center {
+            
+            background-color: aqua;
+            overflow: hidden;
+            margin:0 auto;
+        }
+
+        .left {
+            width: 30%;
+            
+            background-color: red;
+           float: left;
+            height:10000px;
+		    margin-bottom:-9999px;
+          
+        }
+
+        .right {
+            width: 30%;
+            
+            background-color: green;
+            float: right;
+            height:10000px;
+		    margin-bottom:-9999px;
+           
+           
+        }
+
+   
+        .box{
+             position: fixed;
+             width: 100%;
+           
+             background: #ccc;
+             overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    
+       
+            <div class="box clearfix">
+                
+                <div class="left">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique saepe quos tempora esse officiis error repudiandae, sed ducimus. Deleniti fugit cupiditate recusandae! Aliquid inventore dicta eaque accusantium maiores et repellendus!</div>
+                <div class="right">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis cum nisi, harum sequi incidunt nesciunt, tempore quis eum earum mollitia provident maxime at adipisci commodi dolorum eos nam? Molestiae, quia.Laborum labore totam, provident sunt placeat voluptatem illo harum neque repellendus, magni reiciendis sed eligendi officia sapiente quod commodi accusamus? Debitis tempora sunt ea nulla soluta aliquam natus placeat ab.</div>
+                <div class="center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit vero in dolore ad? Sapiente, dolorem maxime voluptatum nulla rem ea dicta! Accusantium sunt impedit ipsa cupiditate quod voluptates minus ipsum.
+                Est quia amet commodi architecto! Fuga deserunt mollitia debitis praesentium. Ducimus adipisci delectus minus quos quisquam? Blanditiis recusandae ipsam quibusdam adipisci repudiandae. Architecto deleniti ipsam et! Nemo fugiat veniam beatae!
+                Voluptatibus consequuntur dolores repudiandae? Quod, vero ea ipsa rem suscipit porro nisi quis commodi veritatis facere facilis odit. Nulla reiciendis similique mollitia repellat minus exercitationem at repudiandae recusandae pariatur harum.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem amet, molestias unde repudiandae nihil quia architecto excepturi culpa alias illum eos! Provident eos laborum ut, quae itaque dolorum autem cum.</div>
+
+            </div>
+        
+   
+
+
+</body>
+
+</html>

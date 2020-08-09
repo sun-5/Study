@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket双向通信协议</title>
+</head>
+<body>
+    <script>
+    var Socket = new WebSocket('ws://echo.websocket.org');
+        Socket.onopen = function(){
+            Socket.send('发送hello')
+        }
+        Socket.onmessage = function(e){
+            console.log(e);
+            console.log(e.data);
+            Socket.close();
+            Socket.send('断开后尝试发送hello')
+        }
+        Socket.onclose = function(){
+            console.log("已断开")
+        }
+    </script>
+
+    
+</body>
+</html>

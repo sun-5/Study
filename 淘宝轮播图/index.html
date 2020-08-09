@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div class="wrapper">
+        <ul class="img-box">
+            <li><a href="javascript:;"><img src="./img/1.jpg" alt=""></a></li>
+            <li><a href="javascript:;"><img src="./img/2.jpg" alt=""></a></li>
+            <li><a href="javascript:;"><img src="./img/3.jpg" alt=""></a></li>
+            <li><a href="javascript:;"><img src="./img/4.jpg" alt=""></a></li>
+            <li><a href="javascript:;"><img src="./img/5.jpg" alt=""></a></li>
+            <li><a href="javascript:;"><img src="./img/1.jpg" alt=""></a></li>
+        </ul>
+        <div class="btn">
+            <a href="javascript:;" class="prevBtn"><i></i></a>
+            <a href="javascript:;" class="nextBtn"><i></i></a>
+        </div>
+        <div class="order">
+            <ul>
+                <li class="item active"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="position:relative;width: 100px;height: 100px;left: 0;margin-top: 100px;background: brown;" id="demo">
+
+    </div>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+        $('div:last').animate({left:300,width:300,height:300,background:'#ccc',},1000,'linear').delay(3000);
+    </script>
+</body>
+</html>

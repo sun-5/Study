@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="https://lib.baomitu.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        pre{
+            margin:15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+    1.网页中会引入哪些常见的静态资源？
+        js：.js .jsx .coffee .ts(TypeScript 类 C#语言)
+        css: .css .less .sass .scss
+        images:.jpg .png .gif .bmp .svg
+        字体文件(Fonts): .svg .ttf .ect .woff .woff2 
+        模板文件: .ejs .jade   .vue[这是在webpack中定义组件的方式，推荐这么用] 
+    2.网页中引入静态资源多了以后有何问题？
+        网页加载速度慢，因为我们要发起很多二次请求 js行为
+        要处理错综复杂的依赖关系
+
+    3.如何解决上述问题
+        合并、压缩、精灵图、图片的Base64编码
+        可以使用之前学过的requireJS，也可以使用webpack解决各个包之间的依赖关系
+    
+    4.什么是webpack？
+        是前端一个项目构建工具，基于Node.js开发出来的一个前端工具（必须安装node.js）
+    
+    5.webpack安装方式
+        npm webpack -g 全局安装，就可以在全局使用webpack命令
+        在项目根目录中运行 npm i webpack --save-dev 安装到项目依赖中
+    
+    
+
+
+
+    </pre>
+    <div id="app"></div>
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{}
+        });
+    Vue.config.devtools = true
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+ <pre>  <h4> 
+    1.创建Vue实例对象 
+    2.init beforeCreate 初始化Vue空实例对象，此时，这个对象身上只有默认的一些生命周期函数，和默认事件，其他的都未创建
+    3.init created data和methods已经初始化完成
+    4.beforeMount 模板编译，渲染模板字符串为内存中的DOM，并未挂载到页面中
+    5.mounted 将内存中编译好的模板真实地 替换 到浏览器页面中去 
+    6.组件初始化完毕，进入运行阶段
+    7.组件运行阶段生命周期函数只有两个：beforeUpdate 和 updated，会根据data数据改变，选择性的触发0次到多次
+    8.beforeUpdate 根据data中最新的数据，在内存中，重新渲染出一份最新的内存DOM树
+    9.updated  页面和data保持同步 都是最新的.
+    10.beforeDestroy Vue实例从运行阶段进入销毁阶段，实例身上所有data和methods，以及过滤器，指令等都处于可用状态，此时还未真正执行销毁
+    11.destroyed Vue实例已经被完全销毁
+</h4>
+    </pre>
+    <div id="app">
+        <h3 id="h3">{{msg}}</h3>
+        <input type="button" value="更新msg" @click="msg='No'">
+    </div>
+
+
+    <script>
+        // Vue实例的生命周期：从Vue实例创建、运行、到销毁期间，伴随各种各样的事件，统称生命周期
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'ok'
+            },
+            methods: {
+                show() {
+                    console.log('执行了show方法')
+                }
+            },
+            beforeCreate() {//第一个生命周期函数，表示实例完全被创建出来之前，会执行它
+                // console.log(this.msg)  undefined
+                // this.show()  undefined
+                // 在beforeCreate 生命周期函数执行时 ，data 和 methods 还未被初始化
+            },
+            created() { //第二个生命周期函数
+                console.log(this.msg + 1)
+                this.show()
+                //在 created 中，data 和 methods 都已经被初始化完成
+                //如果要调用methods方法 操作 data数据 最早只能在created中操作
+            },
+            beforeMount() { // 第三个生命周期函数，模板已在内存中编译完成，尚未把模板渲染到页面中
+                console.log(document.getElementById('h3').innerText)  //打印结果 {{msg}}
+                //在beforeMount 执行时候，页面中的元素还没有真正被替换过来，只是之前写的一些模板字符串
+            },
+            mounted(){//第四个生命周期函数，内存中的已经编译的模板渲染到页面中，用户已经看到
+                console.log(document.getElementById('h3').innerText + 5)
+                //注意：mounted是 实例创建期间 的最后一个生命收起函数，当执行完mounted就表示，实例已经被完全创建好了，
+                //此时如果没有其他操作，这个实例，就静静的躺在内存中，一动不动
+
+                // 如果要通过某些插件操作页面DOM节点，最早在mounted中运行，
+                // 只要执行完mounted 表示整个Vue实例已初始化完毕， 
+                // 此时组件已脱离创建阶段，进入运行阶段
+            },
+
+
+            //接下来是运行中的两个事件
+            beforeUpdate(){ //这时候，表示 我们界面还没有被更新，【数据已更新】触发此函数
+                // console.log('界面上的元素内容：'+document.getElementById('h3').innerText )
+                // console.log('data中数据已更新：' + this.msg)
+            //得出结论：当执行beforeUpdate 时候 ，页面中显示的数据还是旧的，此时data数据是最新的，页面尚未和 最新的数据同步
+            },
+            updated(){
+                console.log('界面上的元素内容：'+document.getElementById('h3').innerText )
+                console.log('data中数据：' + this.msg)
+            }
+        });
+        Vue.config.devTools = true
+
+    </script>
+</body>
+
+</html>

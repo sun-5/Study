@@ -1,0 +1,21 @@
+{
+    "no123":{
+        "chinese":"100",
+        "math":"140",
+        "english":"145",
+        "summary":"289"
+    },
+    "no124":{
+        "chinese":"120",
+        "math":"160",
+        "english":"115",
+        "summary":"689"
+    },
+    "no125":{
+        "chinese":"150",
+        "math":"110",
+        "english":"165",
+        "summary":"249"
+    }
+
+}

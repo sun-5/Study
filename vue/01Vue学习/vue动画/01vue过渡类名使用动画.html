@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <!-- 2.自定义两组样式，来控制transition内部的元素实现动画 -->
+    <style>
+        /* 进入前 和 离开后 */
+        .v-enter,.v-leave-to{opacity: 0;transform: translateX(150px);}
+        /* 进入后 和 离开前 */
+        /* .v-enter-to,.v-leave{opacity:1;} */
+        /* 入场动画的时间段 和 离场动画的时间段 */
+        .v-enter-active,.v-leave-active{transition: all 0.4s ease;}
+
+        /* 自定义name前缀 */
+        .my-enter,.my-leave-to{opacity: 0;transform: translateY(150px);}
+        .my-enter-active,.my-leave-active{transition: all 0.4s ease;}
+    </style>
+</head>
+
+<body>
+    <!-- 
+    enter进入动画
+    v-enter:进入起始点  v-enter-to：进入结束点  v-enter-active：进入阶段时间段
+
+    leave离开动画
+    v-leave:离开起始点  v-leave-to：离开结束点  v-leave-active：离开阶段时间段 
+
+    v-enter  和 v-leave-to  样式一致
+    v-enter-to 和 v-leave  样式一致
+    -->
+    
+   <h2>需求：点击按钮 让h3显示 再点击让h3隐藏</h2> 
+    <div id="app">
+        <!-- vue动画实现方式1 -->
+        <input type="button" value="按钮" @click="flag=!flag"> 
+        <transition>
+            <h3 v-if='flag'>这是一个h3</h3>
+        </transition>
+        <hr>
+        <!-- 共用一个动画效果 -->
+
+        <!-- vue动画实现方式2 -->
+        <!-- 加name 自定义样式类名前缀 -->
+        <transition name="my">
+            <h6 v-if='flag'>这是一个h6</h6>
+        </transition>
+    </div>
+    <!-- 1.使用transition元素(Vue官方提供的元素)，把需要被动画控制的元素，包裹起来 -->
+
+ 
+
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{
+               flag:false
+           },
+           methods:{}
+        });
+    </script>
+</body>
+
+</html>

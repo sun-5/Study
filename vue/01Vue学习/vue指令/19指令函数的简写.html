@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app" >
+        <h3 v-fs='50'>{{dt}}</h3>
+    </div> 
+    <script>
+        
+        var vm=new Vue({
+           el:'#app',
+           data:{
+               dt:new Date()
+           },
+           methods:{},
+           filters:{},
+           directives:{
+               //el 是选中元素，binding 是绑定指令的第二个参数  binding.value 对应参数表达式的值
+               'fs':function(el,binding){
+                el.style.fontSize = parseInt(binding.value) + 'px'
+               }
+               
+           }
+        });
+    Vue.config.devtools = true
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://lib.baomitu.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+               
+                <label>
+                   Name:<input type="text" v-model='name' class="form-contorl">
+                </label>
+                <input type="button" value="添加" @click="add" class="btn btn-primary">
+            </div>
+        </div>
+
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Opreation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for='item in list' :key='item.id'>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td>
+                        <a href="" @click.prevent="del(item.id)"> 删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        // 使用【全局配置】设置默认值
+        Vue.http.option.root = 'http://vue.studyit.io/'
+        //如果通过全局配置了请求数据的接口的 【根域名】。则，每次单独发起http请求的url路径，应该以相对路径开头，前面不能带’/‘
+        //否则，不会启动根路径做拼接
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name:'',
+                list: [{//存放所有品牌列表的数组
+                        id: 1,
+                        name: '五菱宏光',
+                        ctime: new Date()
+                    },
+                    {
+                        id: 2,
+                        name: '众泰',
+                        ctime: new Date()
+                    }
+                ]
+            },
+            created(){//当vm实例的data methods 初始化完毕后，vm实例会自动执行created 这个生命周期函数
+                this.getAllList()
+            },
+            methods:{
+                add(){//添加品牌到后台服务器
+                    //分析：
+                    //1.经过查看数据api接口，发现，要发送一个post请求， this.$http.post
+                    //2.this.$http.post()中接收三个参数
+                    //  2.1第一个参数：要求的url地址
+                    //  2.2第二个参数：要提交给服务器的数据，要以对象形式提交给服务器{name:this.name}
+                    //  2.3第三个参数：配置对象，要以哪种表单数据类型提交，{emulateJSON:true} 
+                    //以普通表单格式提交服务器 application/x-www-form-urlencoded
+                    //3.在post方法中，使用.then 来设置成功的回调函数，如果要拿到成功的结果需要调用result.body
+
+                    this.$http.post('api/addproduct',{name:this.name},{emulateJSON:true}).then(res=>{
+                        if(res.body.status ===0){
+                            //成功
+                            //添加完成后，只需要手动，再调用一下 getAllList 就能刷新品牌列表
+                            this.getAllList()
+                        }else{
+                            //失败
+                            alert('添加失败！')
+                        }
+                    })
+                },
+                del(id){//删除品牌
+                    
+                    this.$http.get('api/delproduct/' + id).then(res=>{
+                        if(res.body.status ===0){
+                            //删除成功
+                            // 完成后，只需要手动，再调用一下 getAllList 就能刷新品牌列表
+                            this.getAllList()
+                        }else{
+                            //失败
+                            alert('删除失败！')
+                        }
+                    })
+                }
+                },
+                getAllList(){  //获取所有的品牌列表
+                //分析：
+                //1.已经导入Vue-resource 这个包，所以可以直接通过 this.$http 来发起数据请求
+                //2.根据接口API文档，获取列表的时候，应该发起get请求
+                //3. this.$http.get('url').then(function(res){})
+                //4.通过then 指定的回调函数之后，可以获取数据服务器返回的result
+                //5.先判断 result.status == 0? 如果=0，就成功，可把result.message赋值给this.list
+                // 如果 result.status \= 0 ，那么弹框提醒，获取数据失败！
+                this.$http.get('api/getprodlist').then(res=>{ //接口失效
+                    //注意：通过$http 获取到的数据，都在result.body 中放着
+                    var result = result.body
+                    if(res.status ==0){
+                        this.list = res.message
+                    }else{
+                        alert('获取数据失败！')
+                    }
+                })
+                }
+            }
+        });
+        Vue.config.devtools = true
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="https://lib.baomitu.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <pre style="margin:20px;font-size:16px">
+        1.使用vue.extend 来创建全局的组件
+        2.使用Vue.component('组件名称',创建出来的组件模板对象)
+    </pre>
+    <div id="app">
+        <my-Com></my-Com>
+        <my-Com2></my-Com2>
+    </div>
+    <script>
+
+        Vue.component('myCom',Vue.extend({ 
+            template:'<h3>这是使用Vue.extend创建的全局组件</h3>'
+         })
+        )
+//直接使用一个模板对象  必须用一个唯一的根元素包裹
+        Vue.component('myCom2',{ 
+            template:'<div><h3>这是使用Vue.extend创建的全局组件</h3><span>123</span></div>'
+         }
+        )
+
+
+
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{}
+        });
+    Vue.config.devtools = true
+    </script>
+</body>
+</html>

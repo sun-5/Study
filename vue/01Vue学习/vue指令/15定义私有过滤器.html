@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+       <h3> {{}}</h3>
+    </div>
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{},
+           filters:{ //私有过滤器，全局vue对象不能用
+               dataFormat:function(dataStr,pattern){
+
+                //过滤器调用时采用就近原则，私有和全局过滤器名称一致，优先调用私有过滤器
+               }
+           }
+
+        });
+    </script>
+</body>
+
+</html>

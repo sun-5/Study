@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="https://lib.baomitu.com/vue-resource/1.5.1/vue-resource.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <pre style="margin:20px;font-size:16px">
+        1.vue组件：为了拆分Vue实例代码量，能够使用不同组件，来划分不同功能模块，需要什么功能就调用什么组件
+        2.模块化：从代码逻辑的角度进行划分，后端的模块话，方便代码分层开发，保证每个功能模块的职能单一
+        3.组件化：从ui界面的角度进行划分，前端的组件化，方便ui组件的重用
+    </pre>
+    <div id="app">
+        <pre style="margin:20px;font-size:16px">
+            1.使用vue.extend 来创建全局的组件
+            2.通过template属性，指定了组件展示的html结构
+            3.使用Vue.component('组件名称',创建出来的组件模板对象)
+            4.如果要使用组件，直接把组件的名称，以html标签形式引入到页面中即可
+            5.组件名称注册时可以驼峰，使用时有大写，需要用 -  间隔 my-Com
+        </pre> 
+        
+        <my-Com></my-Com>
+
+    </div>
+    <script>
+        //1.1使用vue.extend 来创建全局的组件
+        var com1 = Vue.extend({ 
+            template:'<h3>这是使用Vue.extend创建的全局组件</h3>'//通过template属性，指定了组件展示的html结构
+        })
+        //1.2 使用Vue.component('组件名称',创建出来的组件模板对象)
+        Vue.component('myCom',com1)
+
+
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{}
+        });
+    Vue.config.devtools = true
+    </script>
+</body>
+</html>

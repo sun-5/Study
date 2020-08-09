@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <pre>
+     <h1>vm实例-watch属性</h1>
+     使用这个属性可以监听data中数据的变化，然后出发watch中对应function处理函数
+    </pre>
+    <div id="app">
+        
+    <input type="text" v-model='firstName' >+
+    <input type="text" v-model='lastName' > =
+    <input type="text" v-model='fullName'>
+
+    </div>
+    <script>
+        var vm=new Vue({
+           el:'#app',
+           data:{
+            firstName:'',
+            lastName:'',
+            fullName:''
+           },
+           methods:{},
+           watch:{
+            'firstName':function(newVal,oldVal){//加不加引号都可以
+                // this.fullName =  this.firstName + '-' + this.lastName
+                // console.log(newVal + '-' + oldVal)
+                this.fullName = newVal + '-'  + this.lastName
+            },
+            'lastName':function(newVal){//加不加引号都可以
+                this.fullName = this.firstName + '-'  + newVal
+            },
+
+           }
+        }); 
+    </script>
+</body>
+
+</html>

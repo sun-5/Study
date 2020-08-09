@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svg图形绘制及动画</title>
+    <style>
+        svg{
+            border:1px solid #000;
+        }
+        line{
+           stroke: #f54; 
+        }
+        rect{
+           fill:transparent;
+           stroke:crimson; 
+           stroke-width:5px;
+        }
+        circle{
+            fill: cornflowerblue;
+        }
+        ellipse{
+            fill: darkorange;
+            stroke: darkred;
+            stroke-width: 2px;
+        } 
+        polyline{
+           fill:transparent;
+           stroke:chartreuse; 
+           stroke-width:3px;
+        }
+        text{
+            font-size: 20px;
+
+        }
+        path{
+            stroke: crimson;
+            fill:transparent;
+        }
+    </style>
+</head>
+<body>
+    <svg width=500 height=500> 
+        <line x1=100 y1=100 x2=200 y2=100>横线</line>
+        <rect x=200 y=100 width=100 height=100 rx=10 ry=10>矩形</rect>
+        <circle r=50 cx=250 cy=300>圆形</circle>
+        <ellipse rx=100 ry=50 cx=200 cy=400>椭圆</ellipse>
+        <polyline points="60 50,75 35,100 50,125 35,150 50,175 35,190 50">折线</polyline>
+        <polygon points="60 50,75 35,100 50,125 35,150 50,175 35,190 50">多边形</polygon>
+        <div><text>文本</text></div>
+    </svg>
+    <text>
+        <h3>样式属性</h3>
+<pre>   1.fill 填充  
+        2.stroke 画笔 笔触
+        3.stroke-width 线宽
+        4.stroke-opacity/fill-opacity 笔线透明度、填充透明度
+        5.stroke-linecap 每条线两端 butt round square
+        6.stroke-linejoin 两条线连接处效果  bevel round miter
+</pre>
+    </text>
+
+    <svg width=500 height=500>
+        <path d="M 100 100 L 200 200 200 100 100 100"></path>
+        <path d="m 300 200 l 100 200 "></path>
+        <path d="M 100 300 H 300 V 210"></path>
+    </svg>
+
+
+
+
+</body>
+</html>

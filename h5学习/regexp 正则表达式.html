@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="https://www.w3school.com.cn/jsref/jsref_obj_regexp.asp"><h1>JavaScript RegExp 对象 api文档</h1> </a>
+    <h2>https://www.w3school.com.cn/jsref/jsref_obj_regexp.asp</h2> 
+    <script>
+        // 转义符号  \
+         var str = "adcd\"efg";
+        console.log(str)
+        // 换行 \n
+        var str0 = "adce\nasfa";
+        console.log(str0)
+        // \r 回车
+        var str1 = "asda\rcasd";
+        document.write(str1)
+
+        var reg = /abc/;
+        var str2 = "abcd";
+        console.log(reg.test(str2))
+        var reg = new RegExp('abc');//可以加属性后面（'abc',''）
+        console.log(reg.test(str2))
+
+        var reg1 = RegExp(reg); //没有new的话 就是另一个表达式的引用，没人用
+
+        var reg = /ab/;
+        var reg0=/ab/g ; // 返回所有ab  g全局匹配
+        var str = "abababababbas"; 
+        console.log(str.match(reg));//返回一个ab   
+
+        var reg = /^a/gm; //以a开头的a  g全局匹配 m多行匹配
+        var str = 'abcdsd\na';
+        console.log(str.match(reg));
+
+       /* reg.test()
+        str.match() */
+        var reg = /[1234567890][0-9][1234567890]/g //[]内表示取值范围
+        var str = "12309s987sd4651daszxfasfasdq";
+        var reg = /[ab][cd][d]/g //[]内表示取值范围 0-9 A-Z  A-z a-z
+        var str = "abcd";//bcd 第一位是
+        // ^  放入[]内 表示 非   
+        var reg = /(abc|bcd|abd)/g;
+        var str = 'abcd';
+        
+        var reg = /ab/g,
+        str = "abababab";
+        console.log(reg.lastIndex)  //鼠标指针的位置
+        console.log(reg.exec(str)) //0
+        console.log(reg.lastIndex)
+        console.log(reg.exec(str))//2
+        console.log(reg.lastIndex)
+        console.log(reg.exec(str))//4
+        console.log(reg.lastIndex)
+        console.log(reg.exec(str))//6
+        console.log(reg.lastIndex)
+        console.log(reg.exec(str)) //0
+        console.log(reg.lastIndex)
+
+     
+    </script>
+    
+</body>
+</html>

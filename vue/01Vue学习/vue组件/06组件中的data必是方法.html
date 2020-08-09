@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <counter></counter>
+        <hr>
+        <counter></counter>
+        <hr>
+        <counter></counter>
+      
+    </div>
+    <template id='tep'>
+        <div>
+            <input type="button" value="+1" @click='add'>
+            <h3>{{count}}</h3>
+        </div>
+    </template>
+    <script>
+        var dataObj = {count:0}
+
+        Vue.component('counter',{
+            template:'#tep',
+            data:function(){
+                // return dataObj   //外部共享的对象，被引用，会被组件一起调用
+                return {count:0}  //不影响其他组件
+            },
+            methods:{ //组件中有自己的方法
+                add(){
+                    this.count++
+                }
+            }
+        })
+
+
+        var vm=new Vue({
+           el:'#app',
+           data:{},
+           methods:{}
+        });
+    </script>
+</body>
+
+</html>

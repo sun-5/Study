@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <style>
+        .inner{
+            height: 150px;
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+    .stop    阻止冒泡
+    .prevent 阻止默认事件
+    .capture 添加事件监听器时使用事件捕获模式
+    .self  只当事件在该元素本身（不是子元素）触发时触发回调
+    .once  事件只触发一次
+    -->
+
+    <div id="app">
+        <!-- .capture 添加事件监听器时使用事件捕获模式  从外到里捕获 -->
+        <div class="inner" @click.captrue="divHandler">
+            <!-- 加上 .stop 阻止冒泡 -->
+            <input type="button" value="点他" @click.stop="btnHandler"> 
+            <!-- .prevent 阻止默认事件 -->
+            <a href="http://www.baidu.com" @click.prevent="linkClick">有问题，先去百度</a> 
+        </div>
+        <!-- .self  只有点自己的时候才触发-->
+        <div class="inner" @click.self="divHandler">
+            <input type="button" value="点他" @click="btnHandler"> 
+        </div>
+        <!-- .once  事件只触发一次 -->
+        <a href="http://www.baidu.com" @click.prevent.once="linkClick">有问题，先去百度</a> 
+
+
+    </div>
+
+        <script>
+            var vm = new Vue({
+                el:"#app",
+                data:{},
+                methods:{
+                    divHandler(){
+                        console.log("出发了inner div的点击事件")
+                    },
+                    btnHandler(){ //事件冒泡，父元素也被点击触发
+                        console.log("触发了 btn 按钮的点击事件")
+                    },
+                    linkClick(){
+                        console.log("出发了链接的点击事件")
+                    }
+                }
+            })
+        </script>
+
+
+
+
+
+
+</body>
+</html>
