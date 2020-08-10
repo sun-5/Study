@@ -11,6 +11,8 @@ import search from './components/tabbar/search.vue'
  //创建路由对象
 var router = new VueRouter({
     routes:[
+        //路由重定向
+       {path:'/',redirect:'/home'},
        {path:'/home',component:home},
        {path:'/member',component:member},
        {path:'/shopcar',component:shopcar},
