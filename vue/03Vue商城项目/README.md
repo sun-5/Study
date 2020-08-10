@@ -28,3 +28,11 @@
 1.  取消滚动条bug,header tabbar 位移
 2.  从右往左退出
 3.  取消下个页面组件顶上去的bug
+
+## 改造 新闻资讯 路由链接
+
+## 新闻资讯 页面制作
+1. 绘制界面 news.vue，使用MUI中的media-list
+2. 使用 vue-resource 获取数据
+3. 渲染真实数据
+

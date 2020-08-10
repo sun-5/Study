@@ -11,7 +11,7 @@ function getFileByPath(fpath, succCb, errCb) {
 }
 
 
-    getFileByPath(path.join(__dirname, './1.txt'),function(data){
+    getFileByPath(path.join(__dirname, './files/1.txt'),function(data){
         console.log(data + '成功了！')
     },function(err){
         console.log(err.message + '失败了！')
@@ -19,14 +19,16 @@ function getFileByPath(fpath, succCb, errCb) {
 
 
 //需求：先读取文件1，再读取文件2，最后读取文件3
-/* 回调地狱 回调嵌套
-getFileByPath(path.join(__dirname, './1.txt'), function (data) {
+
+//回调地狱 回调嵌套
+//使用ES6中的Promise 来解决回调地狱的问题
+//Promise本质：就是单纯为了解决回调地狱问题，并不能减少代码量
+getFileByPath(path.join(__dirname, './files/1.txt'), function (data) {
     console.log(data + '成功了！')
-    getFileByPath(path.join(__dirname, './2.txt'), function (data) {
+    getFileByPath(path.join(__dirname, './files/2.txt'), function (data) {
         console.log(data + '成功了！')
-        getFileByPath(path.join(__dirname, './3.txt'), function (data) {
+        getFileByPath(path.join(__dirname, './files/3.txt'), function (data) {
             console.log(data + '成功了！')
         })
     })
 })
-*/

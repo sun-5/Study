@@ -6,10 +6,14 @@ import VueRouter from 'vue-router'
 // 1.2安装路由
 Vue.use(VueRouter)
 
+
 //2.1导入vue-resource
 import VueResource from 'vue-resource'
 //2.2安装vue-resource
 Vue.use(VueResource)
+
+//设置请求根路径
+Vue.http.options.root = 'http://www.liulongbin.top:3005'
 
 // 导入MUI样式
 import './lib/mui/css/mui.min.css'   
@@ -35,3 +39,4 @@ var vm = new Vue({
     render:c=>c(app),
     router //1.4挂载路由对象到vm实例
 })
+
