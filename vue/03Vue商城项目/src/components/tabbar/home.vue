@@ -3,8 +3,10 @@
     <!-- 轮播图 -->
     <mt-swipe :auto="4000">
         <!-- 在组建中使用V-for循环一定要绑定key -->
-    <mt-swipe-item v-for='item in lunboList' :key='item.url'>1</mt-swipe-item>
-        <img :src="item.img" alt="">
+        <mt-swipe-item v-for='item in lunboList' :key='item.id'>
+            <img :src="item.img" alt="">
+        </mt-swipe-item>
+        
     </mt-swipe>
     <h3>
         home
@@ -31,7 +33,7 @@ import {Toast} from 'mint-ui'
                         //成功
                         this.lunboList = res.body.message
                         Toast('加载轮播图ok')
-
+                        console.log(this.lunboList)
                     }else{
                         //失败
                         Toast('加载轮播图失败')
@@ -56,6 +58,10 @@ import {Toast} from 'mint-ui'
           &:nth-child(3){
             background-color:rgb(201, 38, 38);
           } 
+        }
+        img{
+            width: 100%;
+            height: 100%;
         }
     }
 </style>
