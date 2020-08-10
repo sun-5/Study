@@ -21,3 +21,5 @@
 2.  使用vue-resource的this.$http.get获取数据
 3.  获取到的数据，保存到data身上
 4.  使用v-for 循环渲染每个item项
+
+##  九宫格布局
