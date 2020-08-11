@@ -6,6 +6,15 @@ import VueRouter from 'vue-router'
 // 1.2安装路由
 Vue.use(VueRouter)
 
+//导入格式化时间插件
+import moment from 'moment'
+//定义全局过滤器
+Vue.filter('dataFormat',function(dataStr,pattern = 'YYYY-MM-DD HH:mm:ss'){
+  return  moment(dataStr).format(pattern)
+})
+
+
+
 
 //2.1导入vue-resource
 import VueResource from 'vue-resource'
@@ -20,12 +29,13 @@ import './lib/mui/css/mui.min.css'
 import './lib/mui/css/mui-icons-extra.css' 
 
 import 'mint-ui/lib/style.css'    
-
+ 
 //按需导入Mint-UI中的组件
-import {Header, Swipe, SwipeItem} from 'mint-ui'
+import {Header, Swipe, SwipeItem,Button} from 'mint-ui'
 Vue.component(Header.name,Header)
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Button.name, Button);
 
 
 //1.3导入自己的router.js路由模块
@@ -39,4 +49,6 @@ var vm = new Vue({
     render:c=>c(app),
     router //1.4挂载路由对象到vm实例
 })
+
+
 

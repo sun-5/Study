@@ -55,6 +55,7 @@
 <script>
  
 import { Toast } from "mint-ui";
+
 export default {
   data() {
     return {
@@ -75,7 +76,12 @@ export default {
           if (res.body.status === 0) {
             //成功
             this.lunboList = res.body.message;
-            Toast("加载轮播图ok");
+            Toast({
+            message: '加载轮播图ok',
+            className: 'toast',
+            duration: 1000,
+            iconClass: 'mint-toast-icon mintui mintui-success'
+            });
             console.log(this.lunboList);
           } else {
             //失败
@@ -87,7 +93,7 @@ export default {
 };
 </script>
 
-<style scoped lang='scss'>
+<style lang='scss' >
 .mint-swipe {
   height: 200px;
 
@@ -121,4 +127,15 @@ export default {
         font-size:14px ;
     }
 }
+.toast{
+  top:75%!important;
+}
+.mintui-success{
+   display: block;
+   text-align: center;
+   font-size: 56px;
+   padding: 20px 0;
+}
+ 
+ 
 </style>
