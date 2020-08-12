@@ -1,7 +1,10 @@
 <template>
-  <div class="app-container">
+  <div class="app-container" >
     <!-- 顶部header区域 -->
-    <mt-header fixed title="Vue项目练手"></mt-header>
+    <mt-header fixed title="Vue项目练手">    
+          <mt-button icon="back" @click="$router.back(-1)" title="返回">
+            </mt-button>
+          </mt-header>
 
     <!-- 中间路由router-view区域 -->
     <transition>
@@ -33,11 +36,14 @@
 </template>
 
 <style lang="scss" scoped>
+ 
+.mint-header{z-index:99;}
 .app-container {
   padding-top: 40px;
   overflow-x: hidden;
   padding-bottom: 50px;
   touch-action: pan-y;
+
 }
 .v-enter {
   // opacity: 0;
@@ -52,6 +58,7 @@
 .v-leave-active {
   transition: all 0.5s ease;
 }
+ 
 .mui-bar-tab .mui-tab-item0 {
   display: table-cell;
   overflow: hidden;

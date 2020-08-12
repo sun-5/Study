@@ -72,6 +72,7 @@
 ## 绘制 图片列表 组件页面 并美化样式
 1. 顶部滑动导航条制作
 2. 制作图片列表
+
 ### 制作顶部滑动导航条注意事项
 1. 需要借助 MUI 中的 tab-top-webview-main.html
 2. 需要把slider 区域的 mui-fullscreen类 去掉
@@ -82,6 +83,37 @@
 + 解决方案：1.把mui.js中的 非严格模式的代码改掉，不显示
 + 方案2：把webpack打包时候的严格模式禁用，使用插件 babel-plugin-transform-remove-strict-mode
 5. 由于目标被视为被动，无法防止被动事件侦听器中的默认：在style全局样式添加* {touch-action: pan-y;初始化mui代码放置于mounted生命周期函数中
+6. 当滑动条调试ok后，获取所有分类并渲染 分类列表
+
 ### tabbar组件无法正常切换
 1. mui.js 和 tabbar 的 样式类 mui-tab-item 冲突
 2. 把所有与 mui-tab-item  相关的样式，重新在App.vue中定义
+
+### 制作图片列表区域
+1. 图片列表需要使用懒加载技术，可以用Mint-UI现场的组件 'lazy-load';
+2. 根据'lazy-load'的使用文档，尝试使用
+3. 渲染图片列表数据
+
+### 实现了 图片列表的 懒加载改造和样式美化
+
+## 实现点击图片 跳转到 图片详情页面
+1. 在改造li成 router-link的时候，需要使用tag属性指定要渲染为 哪种元素
+
+## 实现 详情页面的布局和美化，同时获取数据渲染页面
+
+## 实现 图片详情中 缩略图的功能
+1. 图片缩略图预览插件 cnpm i vue-preview -S 安装插件 main.js中引用
+2. 获取所有的图片列表，使用 <vue-preview :slides="list" @close="handleClose"></vue-preview> 组件完成列表渲染
+3. 注意：查看元素类名，设置图片列表样式
+4. 注意：每个图片数据对象中，必须有w和h属性，宽和高，还有scr msrc属性
+
+## 绘制 商品列表页面基本结构并美化
+
+## 尝试手机上 进行项目的预览和测试
+1. 要保证手机可以正常运行
+2. 要保证手机和开发项目的电脑，处于同一个 WIFI 环境中，也就是说手机可以访问到电脑的IP（手机电脑，处于同一网络）
+3. 打开自己项目中 pack.json文件，在dev脚本中，添加一个 --host 指令，把当前 电脑的 WIFI IP 地址，设置为 --host 的指令值
+ +  查看自己电脑所处WIFI 的 IP 地址;配置webpack.config.json中的host
+ +  cmd 输入 ipconfig 获取IPv4地址 192.168.1.101
+
+ 
