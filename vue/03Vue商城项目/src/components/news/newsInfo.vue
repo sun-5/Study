@@ -14,12 +14,14 @@
    </div>
    <!-- 评论区子组件 -->
    <comment-box :id='this.id'>  </comment-box>
+
+   
 </div>
 
 </template>
 
 <script>
-//1.导入评论子组件
+//1.导入评论子组件 
 import comment from '../subcomponents/comment.vue'
 
 import {Toast} from 'mint-ui'

@@ -8,7 +8,8 @@ import shopcar from './components/tabbar/shopcar.vue'
 import search from './components/tabbar/search.vue'
 import news from './components/news/news.vue'
 import newsInfo from './components/news/newsInfo.vue'
- 
+import photolist from './components/photo/photolist.vue'
+
  //创建路由对象
 var router = new VueRouter({
     routes:[
@@ -20,6 +21,7 @@ var router = new VueRouter({
        {path:'/search',component:search},
        {path:'/home/news',component:news},
        {path:'/home/newsInfo/:id',component:newsInfo},
+       {path:'/home/photolist',component:photolist},
     ],
     linkActiveClass:'mui-active' //覆盖默认路由高亮的类，默认：router-link-active
 })
