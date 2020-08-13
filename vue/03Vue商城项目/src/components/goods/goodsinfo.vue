@@ -13,9 +13,18 @@
     <!-- 商品购买区域 -->
     <div class="mui-card">
       <!--页眉，放置标题-->
-      <div class="mui-card-header">页眉</div>
+      <div class="mui-card-header">商品名称标题</div>
       <!--内容区-->
-      <div class="mui-card-content">内容区</div>
+      <div class="mui-card-content">
+        <p class="price">
+          市场价：<del>￥2399</del>&nbsp;&nbsp;销售价：<span class="now_price">￥2199</span>
+        </p>
+        <p>购买数量：<numbox></numbox></p>
+        <p>
+          <mt-button type='primary' size='small'>立即购买</mt-button>
+           <mt-button type='danger' size='small'>加入购物车</mt-button>
+        </p>
+      </div>
       <!--页脚，放置补充信息或支持的操作-->
     </div>
 
@@ -35,9 +44,10 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //import 《组件名称》 from '《组件路径》';
 import swiper from '../subcomponents/swiper.vue'
+import numbox from '../subcomponents/goodsinfo_numbox.vue'
 export default {
   //import引入的组件需要注入到对象中才能使用
-  components: {swiper},
+  components: {swiper,numbox},
   data() {
     return {
       id:this.$route.params.id,//将路由参数对象中的id挂载到data上
