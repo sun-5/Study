@@ -1,12 +1,7 @@
 <template>
   <div>
-    <!-- 轮播图 -->
-    <mt-swipe :auto="4000">
-      <!-- 在组建中使用V-for循环一定要绑定key -->
-      <mt-swipe-item v-for="item in lunboList" :key="item.id">
-        <img :src="item.img" alt />
-      </mt-swipe-item>
-    </mt-swipe>
+    <!-- 轮播图  改造为轮播图组件-->
+     <swiper :lunbolist="lunbolist" :isfull='true'>  </swiper>
       <!-- 九宫格 到 六宫格 改造 -->
       <ul class="mui-table-view mui-grid-view mui-grid-9">
         <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -53,15 +48,18 @@
 </template>
 
 <script>
- 
+import swiper from '../subcomponents/swiper.vue'
 import { Toast } from "mint-ui";
 
 export default {
   data() {
     return {
-      lunboList: [], //保存轮播图数据
+      lunbolist: [], //保存轮播图数据
 
     };
+  },
+  components:{
+    swiper
   },
   created() {
     this.getLunbo();
@@ -75,14 +73,14 @@ export default {
           // console.log(res.body)
           if (res.body.status === 0) {
             //成功
-            this.lunboList = res.body.message;
+            this.lunbolist = res.body.message;
             Toast({
             message: '加载轮播图ok',
             className: 'toast',
             duration: 1000,
             iconClass: 'mint-toast-icon mintui mintui-success'
             });
-            console.log(this.lunboList);
+            console.log(this.lunbolist);
           } else {
             //失败
             Toast("加载轮播图失败");
@@ -94,25 +92,7 @@ export default {
 </script>
 
 <style lang='scss' >
-.mint-swipe {
-  height: 200px;
 
-  .mint-swipe-item {
-    &:nth-child(1) {
-      background-color: rgb(78, 110, 250);
-    }
-    &:nth-child(2) {
-      background-color: rgb(199, 202, 0);
-    }
-    &:nth-child(3) {
-      background-color: rgb(201, 38, 38);
-    }
-  }
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
 .mui-grid-view.mui-grid-9{
     background: #fff;
     border:none;

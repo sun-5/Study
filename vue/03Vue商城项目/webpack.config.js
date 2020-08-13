@@ -19,7 +19,7 @@ module.exports = { //node中语法 webpack通过node开发的
     mode: 'development',// 配置开发模式，mode的默认配置就是production，就是说如果你不配置mode默认值是生产模式   
     devServer:{
         open:true,//自动打开浏览器
-        host:'192.168.1.101',
+        // host:'192.168.1.101', 本地ipv4地址 可供手机调试
         port:3000,//设置启动时候的运行端口
         contentBase:'src',//指定托管的根目录
         hot:true //启用热更新 第一步
