@@ -1,6 +1,12 @@
 <!-- 商品详情页 -->
 <template>
   <div class="goodsinfo-container">
+    <transition 
+    @before-enter='beforeEnter' 
+    @enter='enter' 
+    @after-enter='afterEnter'> 
+    <div class="ball" v-show="ballFlag" ref="ball"></div>
+    </transition>
     <!-- 商品轮播图区域 -->
     <div class="mui-card">
       <!--内容区-->
@@ -13,16 +19,16 @@
     <!-- 商品购买区域 -->
     <div class="mui-card">
       <!--页眉，放置标题-->
-      <div class="mui-card-header">商品名称标题</div>
+      <div class="mui-card-header">{{goodsinfo.title}}</div>
       <!--内容区-->
       <div class="mui-card-content">
         <p class="price">
-          市场价：<del>￥2399</del>&nbsp;&nbsp;销售价：<span class="now_price">￥2199</span>
+          市场价：<del>￥{{goodsinfo.market_price}}</del>&nbsp;&nbsp;销售价：<span class="now_price">￥{{goodsinfo.sell_price}}</span>
         </p>
-        <p>购买数量：<numbox></numbox></p>
+        <p>购买数量：<numbox @getcount='getSelectCount' :max='goodsinfo.stock_quantity'></numbox></p>
         <p>
           <mt-button type='primary' size='small'>立即购买</mt-button>
-           <mt-button type='danger' size='small'>加入购物车</mt-button>
+           <mt-button type='danger' size='small' @click='addShopCar'>加入购物车</mt-button>
         </p>
       </div>
       <!--页脚，放置补充信息或支持的操作-->
@@ -31,13 +37,21 @@
     <!-- 商品参数区域 -->
     <div class="mui-card">
       <!--页眉，放置标题-->
-      <div class="mui-card-header">页眉</div>
+      <div class="mui-card-header">商品参数</div>
       <!--内容区-->
-      <div class="mui-card-content">内容区</div>
+      <div class="mui-card-content">
+        <p>商品货号：{{goodsinfo.goods_no}}</p>
+        <p>库存情况：{{goodsinfo.stock_quantity}}件</p>
+        <p>上架时间：{{goodsinfo.add_time|dataFormat}}</p>
+      </div>
       <!--页脚，放置补充信息或支持的操作-->
-      <div class="mui-card-footer">页脚</div>
+      <div class="mui-card-footer">
+        <mt-button type='primary' size='large' plain @click="goDesc(id)">图文介绍</mt-button>
+        
+         <mt-button type='danger' size='large' plain @click="goComment(id)">商品评论</mt-button>
+      </div>
     </div>
-  </div>
+  </div> 
 </template>
 
 <script>
@@ -51,7 +65,10 @@ export default {
   data() {
     return {
       id:this.$route.params.id,//将路由参数对象中的id挂载到data上
-      lunbolist:[]
+      lunbolist:[],
+      goodsinfo:{} ,//获取到的商品信息
+      ballFlag:false, //控制小球隐藏和显示的标识符
+      selectrdCount:1 //保存用户选中的商品数量
     };
   },
   methods: {
@@ -68,11 +85,54 @@ export default {
            this.lunbolist = res.body.message;
           }  
         });
+    },
+    getGoodsInfo(){
+      //获取商品的信息
+      this.$http.get('api/goods/getinfo/'+this.id).then(res=>{
+        if(res.body.status==0){
+          this.goodsinfo = res.body.message[0]
+        }
+      })
+    },
+    goDesc(id){
+      //点击使用编程式导航，跳转到图文介绍页面
+    this.$router.push({name:'goodsdesc',params:{id}})
+    },
+    goComment(id){
+      this.$router.push({name:'goodscomment',params:{id}})
+    },
+    addShopCar(){
+      //添加到购物车
+      this.ballFlag=!this.ballFlag
+    },
+    beforeEnter(el){
+      el.style.transform = 'translate(0,0)'
+    },
+    enter(el,done){
+     //获取小球位置
+     const ballPosition = this.$refs.ball.getBoundingClientRect()
+     //获取徽标位置
+     const badgePosition = document.getElementById('badge').getBoundingClientRect()
+    const xDist = badgePosition.left - ballPosition.left
+    const yDist = badgePosition.top - ballPosition.top
+
+      el.offsetWidth;
+      el.style.transform = `translate(${xDist}px,${yDist}px)`
+      el.style.transition = 'all 1s cubic-bezier(.4,-0.3,1,.68)'
+      done()
+    },
+    afterEnter(el){
+      this.ballFlag = !this.ballFlag
+    },
+    getSelectCount(count){
+      // 当子组件把 选中的数量 传递给父组建的时候，把选中的值保存到data上
+      this.selectrdCount = count
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
     this.getLunbo()
+    this.getGoodsInfo()
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
@@ -90,6 +150,36 @@ export default {
 .goodsinfo-container {
   background: #eee;
   overflow: hidden;
+  .mui-card-header{
+    font-size: 18px;
+  }
+  .mui-card-content{
+    padding:10px 15px;
+     .price {
+    font-size: 16px;
+    color: #000;
+      .now_price {
+    color: red;
+  }
+  }
+  }
+.mui-card-footer{
+  display: block;
+  button{
+    margin: 15px 0;
+  }
+} 
+.ball{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: red;
+  position: absolute;
+  z-index: 99;
+  top: 367px;
+  left: 140px;
+}
+
 }
 .mint-swipe{
   width: auto;
