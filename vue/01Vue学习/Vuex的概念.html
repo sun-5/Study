@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre style="font-size: 16px;margin:20px">
+        <h3>Vuex概念</h3>
+        Vuex是Vue配套的 公共数据管理工具，他可以把一些共享的数据，保存到vuex中，
+        方便整个程序中的 任何组件 直接获取或者修改我们的公众数据
+        不需要再通过层层父子组件传递数据
+        1.只有共享的数据，才有权利放到vuex中
+        2.私有的数据，只要放到组件data中即可
+        3.porps 存放父组件穿过来的数据 和 data 私有的数据
+        4.Vuex是一个全局共享数据的仓库
+
+        Vuex 的使用
+        1.安装vuex：npm i vuex -S 或者 yarn add vuex
+        2.创建vuex对象:const store = new Vuex.Store({
+            state:{ //存数据 data
+                count:0
+            },
+            mutations:{ //方法 methods
+                increment(state){
+                    state count++
+                }
+            }
+        })
+        3.把store放到vm实例中
+
+        项目中使用：
+        1.npm i vuex -S 
+        2.import Vuex from 'vuex'
+        3.Vue.use(Vuex)
+        4.var store = new Vuex.Store({
+            state:{
+                count:0 
+            },
+            mutations:{
+                increment(state){
+                    state count++
+                }
+            }
+        })
+        5.var vm =new Vue({
+            el：#app,
+            render:c=>c(App),
+            store 
+            //将vuex创建的store挂载到vm上，任何组件都可以通过，this.$store.state.xxx 来访问其中的数据
+        })
+
+        注意事项：
+        不支持组件自行操作数据，如果多个组件操作vuex数据，容易造成紊乱，
+        使用vuex中mutations自行操作数据
+        mutations:{
+            increment(state){
+                state count++
+            }
+        }
+        子组件想调用mutations中方法，只能使用 this.$store.commit('方法名')
+        此种调用方式，和this.$emit('父组件中方法名') 类似
+    </pre>
+    
+</body>
+</html>
