@@ -118,7 +118,7 @@ export default {
 
       el.offsetWidth;
       el.style.transform = `translate(${xDist}px,${yDist}px)`
-      el.style.transition = 'all 1s cubic-bezier(.4,-0.3,1,.68)'
+      el.style.transition = 'all 0.5s cubic-bezier(.4,-0.3,1,.68)'
       done()
     },
     afterEnter(el){
@@ -127,6 +127,7 @@ export default {
     getSelectCount(count){
       // 当子组件把 选中的数量 传递给父组建的时候，把选中的值保存到data上
       this.selectrdCount = count
+      console.log(this.selectrdCount)
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）

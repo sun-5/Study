@@ -23,6 +23,7 @@ export default {
   watch:{
     //属性监听
     'max':function(newVal,oldVal){
+      //使用 JS API 设置 number 的最大值
        mui('.mui-numbox').numbox().setOption('max',newVal)
     }
   },
@@ -40,6 +41,7 @@ export default {
       //每当文本框的数据被修改的时候，立即把 最新的数据 通过事件调用，传递给父组建
       // console.log(this.$ref.numbox.value)
       this.$emit('getcount',parseInt(this.$refs.numbox.value))
+      
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
