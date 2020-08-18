@@ -55,12 +55,14 @@
         不支持组件自行操作数据，如果多个组件操作vuex数据，容易造成紊乱，
         使用vuex中mutations自行操作数据
         mutations:{
-            increment(state){
+            increment(state,'第二个参数'){
                 state count++
             }
         }
-        子组件想调用mutations中方法，只能使用 this.$store.commit('方法名')
-        此种调用方式，和this.$emit('父组件中方法名') 类似
+        子组件想调用mutations中方法，只能使用 this.$store.commit('方法名','第二个参数')
+        此种调用方式，和this.$emit('父组件中方法名') 类似,
+        mutations 的 函数参数列表中，最多支持两个参数，其中，参数1：是state状态，
+        参数2：通过commit 提交过来的参数
     </pre>
     
 </body>
