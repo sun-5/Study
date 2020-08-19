@@ -103,7 +103,15 @@ export default {
     },
     addShopCar(){
       //添加到购物车
-      this.ballFlag=!this.ballFlag
+      this.ballFlag=!this.ballFlag;
+      var goodsinfo = { //拼接出一个要保存到store中car数组里的 商品信息对象
+        id:this.id,
+        count:this.selectrdCount,
+        price:this.goodsinfo.sell_price,
+        selected:true
+        }
+        //调用store中的mutations来将商品信息加入购物车
+        this.$store.commit('addToCar',goodsinfo)
     },
     beforeEnter(el){
       el.style.transform = 'translate(0,0)'

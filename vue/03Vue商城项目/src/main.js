@@ -6,6 +6,46 @@ import VueRouter from 'vue-router'
 // 1.2安装路由
 Vue.use(VueRouter)
 
+//注册vuex
+import Vuex from 'vuex'
+Vue.use(Vuex)
+var store = new Vuex.Store({
+  state:{ //this.$store.state.xxx
+    car:[]//将购物车中商品的数据，用一个数组存储，在car数组中，存储一些商品的对象
+          //{id:商品id,count:要购买的数量,price:商品的单价,selected:false}
+  },
+  mutations:{ //this.$store.commit('方法名',按需传递唯一参数)
+    addToCar(state,goodsinfo){
+      //点击加入购物车，把商品信息，保存到store中的car上
+      //分析：1.如果购物车中，之前已经有这个商品，只需要更新数量
+      // 2.如果没有，则直接把商品数据，push到car 数组中
+      var flag = false //假设没有找到一样的商品
+      state.car.some(item=>{
+        if(item.id==goodsinfo.id){
+          item.count += parseInt(goodsinfo.count)
+          flag =true
+          return true
+        }
+      })
+      //如果循环完毕，flag还是false则把商品对象信息push到数组中
+      if(!flag){
+        state.car.push(goodsinfo)
+      }
+    }
+  },
+  getters:{//this.$store.getters.xxx
+    getAllCount(state){
+      var c = 0;
+      state.car.forEach(item=>{
+        c += item.count
+      })
+      return c
+    }
+  }
+})
+
+
+
 //导入格式化时间插件
 import moment from 'moment'
 //定义全局过滤器
@@ -56,7 +96,8 @@ import app from './App.vue'
 var vm = new Vue({
     el:'#app',
     render:c=>c(app),
-    router //1.4挂载路由对象到vm实例
+    router, //1.4挂载路由对象到vm实例
+    store//挂载sotre 状态管理对象
 })
 
 

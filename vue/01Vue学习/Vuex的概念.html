@@ -62,7 +62,21 @@
         子组件想调用mutations中方法，只能使用 this.$store.commit('方法名','第二个参数')
         此种调用方式，和this.$emit('父组件中方法名') 类似,
         mutations 的 函数参数列表中，最多支持两个参数，其中，参数1：是state状态，
-        参数2：通过commit 提交过来的参数
+        参数2：通过commit 提交过来的参数 ，可以是对象
+
+        getters：{ //只负责对外提供数据，不负责修改数据，修改state中的数据，请找mutations
+            opt：function（state）{
+                return '当前最新的count值是：'+ state.count
+            }
+        }
+        经过对比，发现getters中的方法，和组件中的过滤器比较类似，都没有修改原数据，都是把原数据做了一层包装，提供给使用者
+        其次，getters 和 computed 比较像，只要state中数据发现变化，那么getters中的引用的数据也会立即出发变化
+    
+        总结：
+        1.state中的数据不能直接修改，如果想要修改，必须通过mutations
+        2.如果组件想要从state上获取数据：需要 this.$store.state.xxx
+        3.如果组件，想要修改数据，必须使用 mutations 提供的方法，需要通过 this.$store.commit('方法名'，唯一的一个参数)
+        4.如果 store 中 state上的数据，在对外提供的时候，需要做一层包装，那么，推荐使用getters，如果需要使用getters，则用 this.$store.getters.xxx
     </pre>
     
 </body>
