@@ -5,7 +5,7 @@
     <!-- 用watch属性监听父组建传递过来的max值，不管max会被触发几次，但是最后一次肯定是一个合法的max数值 -->
     <div class="mui-numbox" data-numbox-min="1" style="height:30px">
       <button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-      <input id="test" class="mui-input-numbox" type="number" value="1" @change='countChanged' ref='numbox'/>
+      <input id="test" class="mui-input-numbox" type="number" :value="initcount" @change='countChanged' ref='numbox'/>
       <button class="mui-btn mui-btn-numbox-plus" type="button" disabled>+</button>
     </div>
   </div>
@@ -19,7 +19,7 @@ import mui from '../../lib/mui/js/mui.js'
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {},
-  props:['max'],
+  props:['max','initcount','goodsId'],
   watch:{
     //属性监听
     'max':function(newVal,oldVal){
@@ -39,7 +39,12 @@ export default {
   methods: {
     countChanged(){
       //数量改变了
-      
+      console.log(this.$refs.numbox.value)
+      // 把最新数量值，更新到 store 中
+      this.$store.commit('updateGoodsInfo',{
+        id:this.goodsId,
+        count:this.$refs.numbox.value
+      })
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
