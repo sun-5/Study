@@ -1,10 +1,11 @@
 <template>
   <div class="app-container" >
     <!-- 顶部header区域 -->
-    <mt-header fixed title="Vue项目练手">    
-          <mt-button icon="back" @click="$router.back(-1)" title="返回">
-            </mt-button>
-          </mt-header>
+    <mt-header fixed title="Vue项目练手"> 
+        <span  slot="left"  @click="goback" v-show="flag">
+          <mt-button icon="back">返回</mt-button>
+        </span>
+     </mt-header>
 
     <!-- 中间路由router-view区域 -->
     <transition>
@@ -34,6 +35,33 @@
     </nav>
   </div>
 </template>
+<script>
+  export default{
+    data(){
+      return {
+        flag:false
+      }
+    },
+    methods:{
+      goback(){
+          //点击后退
+          this.$router.go(-1)
+      }
+    },
+    created(){
+      this.flag = this.$route.path ==='/home'?false:true
+    },
+    watch:{
+      "$route.path":function(newVal){
+        if(newVal === "/home"){
+          this.flag = false
+        }else{
+          this.flag = true
+        }
+      }
+    }
+  }
+</script>
 
 <style lang="scss" scoped>
  
