@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax跨域的解决</title>
+</head>
+<body>
+    <pre style="margin: 10px;font-size: 16px;">
+        <h3>跨域：跨域名
+            同源策略即：同一协议，同一域名，同一端口号。当其中一个不满足时，我们的请求即会发生跨域问题。
+        </h3>
+        1.一个域名下xxx.com的文件请求和他不一样域名aaa.com下的资源文件，就会产生跨域.
+        2.用iframe去包裹不同域名下的网页文件，可以包裹网页进来，但是不能操作dom
+        <h3>跨域的解决</h3>
+        1.通过服务端php请求资源，通过服务端中转，然后当前域名再请求php文件
+        2.服务器端设置一个xml文件，设置请求头等，设为白名单
+        <h3>jsonp：JSON with Padding</h3>
+        1.script标签（link、 img ）的src属性可以通过get方式获取远程资源
+        2.用script标签加载资源，没有跨域问题
+        3.在资源加载进来之前定义好一个函数，这个函数接收一个参数（数据），函数里面利用这个参数（数据）做一些逻辑处理
+        4.然后需要的时候，通过script标签 加载对应远程文件资源，
+        5.当远程文件资源被加载进来的时候，就会执行我们前面定义好的函数，并且把数据当做这个函数的参数传入进去
+        6.让script标签，在按钮点击之后，再去加载远程资源（动态创建script标签）
+    </pre>
+    <script src="1.txt"></script>
+    <script >
+        console.log(a) // 同域名下文件 1.txt中的变量
+    </script>
+
+    <script>
+        function fn(data){
+           console.log(data)
+        }
+    </script>
+     <script src="2.txt"></script> 
+     <!-- 无法使用2.txt中数据，没有变量名存储 -->
+ 
+</body>
+</html>

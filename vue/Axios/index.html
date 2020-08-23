@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+<body>
+<button onclick="getaxios()">getaxios</button>
+<button onclick="postaxios()">postaxios</button>
+<button onclick="allaxios()">allaxios</button>
+  
+</body>
+
+<!-- 引入 Axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function allaxios(){
+        function getAxios1(){
+            return axios.get('./axios.php?month=8&day=22')
+        }
+        function getAxios2(){
+            return axios.get('./axios.php?month=8&day=21')
+        }
+        axios.all([getAxios1(),getAxios2()]).then(axios.spread(function(data1,data2){
+            console.log(data1)
+            console.log(data2)
+        }))
+    }
+
+
+
+    function comaxios(){
+        //通过config对象来配置axios请求
+        axios({
+            method:'post',
+            url:'./axios.php',
+            data:{month:8,day:23},
+
+        })
+        .then(function(res){
+            console.log(res)
+        })
+        .catch(function(err){ //失败的回调函数
+            console.log(err)
+        })
+    }
+
+
+    function postaxios(){
+        axios.post('./axios.php',{
+                month:8,
+                day:23
+        })
+        .then(function(res){ //成功的回调函数
+            console.log(res)
+        })
+        .catch(function(err){ //失败的回调函数
+            console.log(err)
+        })
+    }
+    function getaxios(){
+        axios.get('./axios.php',{
+            params:{
+                month:8,
+                day:23
+            }
+        })
+        .then(function(res){ //成功的回调函数
+            console.log(res)
+        })
+        .catch(function(err){ //失败的回调函数
+            console.log(err)
+        })
+    }
+</script>
+</html>
