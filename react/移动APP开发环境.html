@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>开发环境搭建</h3>
+    <h3>一、Java jdk安装和配置</h3>
+    <pre style="margin: 20px;font-size:16px">  
+        1.安装Java JDK包（Java开发工具+Jre）
+        2.安装后，查看是否安装成功；进入cmd窗口，输入java -version
+        3.JDK环境变量配置：
+        步骤：计算机→属性→高级系统设置→高级→环境变量
+            a.新建系统变量JAVA_HOME
+                变量名：JAVA_HOME；变量值：D:\Program Files\Java\jdk1.8.0_191（安装路径）
+            b.编辑系统变量Path
+                Windows10 电脑，新建变量值：%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;
+                Windows7 电脑，在变量值最后输入%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;注意用;号分隔
+            c.新建系统变量CLASSPATH变量
+                变量名：CLASSPATH  变量值：%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar
+        4.cmd命令行工具，输入 javac 如果能出现javac命令选项，则表示配置成功！
+    </pre>
+    <h3>二、安装Node.js</h3>
+    <h3>三、安装C++环境</h3>
+    大多是情况系统自带c++环境，不用手动安装
+    <h3>四、安装Git环境</h3>
+    <h3>五、安装Python环境</h3>
+    RN中打包时会用到Python的工具
+    命令行运行python查看是否成功
+    <h3>六、安装配置Android环境</h3>
+    https://www.androiddevtools.cn/#
+    1.下载安装Android SDK Tools，installer_r24.4.1-windows.exe，不要安装packages
+    2.打开目录，将android-25/android-23、24(react-native必须依赖这个)解压后，放到platforms文件夹下
+    3.解压platfor-tools文件，放到根目录
+    
+    <h3>七、环境</h3>
+    <pre style="margin: 20px;font-size:16px">  
+        <h3>前端混合APP开发框架</h3>
+        1.Html5+  Dcloud上一代产品
+        2.ReactNative
+        3.Weex
+        4.Ionic
+        5.uni-app Dcloud新一代，Html5+的更进一步
+        <h3>开发框架之间的区别</h3>
+        1.Html5+ 和 Ionic :
+            a.要先做出一个完整的网站，然后在网站的基础上使用 H5+ 或 Ionic 提供的打包技术，把网站打包成一个应用
+            b.使用打包技术安装到手机上，为了安装到手机，为了调用硬件底层API
+            c.打包好之后就得到一个应用app，这个应用内部运行的其实是网站
+            优势：适合前期小规模小成本网站打包封装套壳
+                开发阶段可以使用框架提供的UI组件，快速开发一个漂亮网站
+        2.ReactNative 和 Weex 、uni-app
+            a.首先需要开发出一个完整的项目，这里开发的不是网站，而是一个模板项目
+            b.这里的模板项目，既不能运行到浏览器中，也不能运行到手机中，只是一个半成品
+            c.当模板项目开发完，在进行打包时候，需要使用RN 或 Weex提供的打包命令行，把模板项目中的源代码，
+            d.逐行翻译成 原生的 java 或 OC代码，最终打包得到的APP，内部全部转换成了 原生的代码，
+            e.前端技术开发出来的原生性质的APP，原生容器壳+原生代码
+            优势：性能高于网站打包的app
+            劣势：可用组件没有上面多
+         3.uni-app是双渲染引擎，webview和weex都内置了，随便开发者使用切换
+    </pre>
+
+</body>
+</html>
