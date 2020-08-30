@@ -8,8 +8,4 @@ $url = "http://web.juhe.cn:8080/constellation/getAll?consName=".$starName."&star
 $data = file_get_contents($url);
 echo $data;
 
-
- 
- 
-
 ?>

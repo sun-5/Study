@@ -1,4 +1,6 @@
 <?php
+
+//php语言开发
 echo    
 '
 <style>

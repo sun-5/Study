@@ -1,8 +1,9 @@
 <?php
- 
+ //php基本语法 数据类型
 echo
 '
 <h3>php基本语法</h3>
+<pre>
 1. < ?php 代表php开始，往下部分是php代码<br>
 2. ?> 代表php结尾<br>
 3.写完一段代码就需要加上分号;<br>
@@ -27,6 +28,11 @@ echo
 6.对象类型，Object复合类型，var_dump一个变量，类型为Object<br>
 7.数组类型，Array复合类型，var_dump一个变量，类型为Array<br>
 8.资源类型，resource，word文件，图片，音乐，视频，网页， 数据库等
+9.查看和判断数据类型:gettype(变量名)获得变量类型，var_dump(变量)输出变量类型和值
+    判断：is_int ,is_bool,is_float,is_string,is_array,is_null,is_object,is_null...
+10.自动转换和强制转换：布尔值的自动类型转换，整型0为假，浮点的0.0为假，空字符串为假，字符串0，空数组，空都为假
+    强制转换：intval()转换为整型,flatval()转为浮点型,straval()转为字符串，
+</pre>
 ';
 
 echo   '<hr>';
@@ -66,4 +72,5 @@ $res = false;
 var_dump(isset($res));
 $shu = array(1,2,1,3,4);
 var_dump($shu);
+echo gettype($shu);
 ?>
