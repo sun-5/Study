@@ -7,5 +7,5 @@ $url = "http://web.juhe.cn:8080/constellation/getAll?consName=".$starName."&star
 //url 需要编码中文为字符格式
 $data = file_get_contents($url);
 echo $data;
-
+//输出data
 ?>
