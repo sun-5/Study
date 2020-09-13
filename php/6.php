@@ -144,4 +144,5 @@ echo sprintf('你好，今年我%b岁,我叫%s',$age,$name),'<br>';
 
 echo str_repeat($str12,2),'<br>';
 echo str_shuffle($str12),'<br>';
+
 ?>
