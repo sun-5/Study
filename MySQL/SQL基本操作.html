@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        pre{
+            font-size:16px;
+            font-family: 'Microsoft YaHei';
+        }
+    </style>
+</head>
+<body>
+    
+<h3>
+    数据库基本操作
+</h3>
+数据库是数据存储的最外层，最大单元
+<h3>创建数据库</h3>
+<pre>
+    --创建数据库：
+    create database mydatabase
+
+    库选项：数据库的相关属性
+    字符集：charset字符集，代表着当前数据库下的所有表存储的数据默认指定的字符集
+    校对集：collate校对集
+    --创建时指定字符集
+    create database mydatabase2 charset gbk
+</pre>
+<h3>显示数据库</h3>
+<pre>
+    每个数据库文件夹下都有一个opt文件，保存是对应的数据库选项
+        defaul-character-set=utf8
+        default-collation=utf8_general_ci
+          字符集和校对集，字符集如果没有指定，则使用DMBS默认，校对集随字符集
+
+显示全部
+    --显示所有数据库
+    show databases
+    
+    information_schema：保存数据库所有的结构信息，表、库
+    数据库名
+    mysql 核心数据库：权限关系
+    performance_schema:效率库
+    test：测试：空库
+
+显示部分
+    show databases like '匹配模式'
+    _:匹配当前位置单个字符
+    %：匹配指定位置多个字符
+
+    获取以my开头的全部数据库：'my%'
+    获取m开头，后面第一个字母不确定，最后为database的数据库：'m_database'
+    获取以database结尾的数据库： '%database'
+
+    --查看以my开头的数据库
+    show databases like 'my%'
+
+显示数据库创建语句
+语法：show create database mydatabase
+</pre>
+<h3>选择数据库</h3>
+<pre>
+为什么要选择数据库？因为数据是存储到数据表，表存在数据库下，如果要操作数据，那么必须进入到对应的数据库才行
+
+--基本语法：use 数据库名字
+执行后返回：Database changed 表示当前已进入指定数据库
+</pre>
+<h3>修改数据库</h3>
+<pre>
+    修改数据库字符集（库选项）：字符集和校对集
+    mysql5.5之前可以rename修改数据库名称，5.5之后不可以
+基本语法： alter database 数据库名字 charset = 字符集
+    --修改数据库字符集
+    alter database mydatabase charset gbk
+    一旦修改成功，opt文件中就会体验
+</pre>
+<h3>删除数据库</h3>
+<pre>
+    基本语法:drop database 数据库名字
+    --删除数据库
+    drop database mydatabase
+</pre>
+<h3>
+    数据表操作
+</h3>
+<pre>
+创建数据表
+    普通创建表
+        基本语法：create table 表明（字段名 字段类型[字段属性]，字段名 字段类型，。。。）
+        【表选项】：与数据库选项类似
+            ENgine：存储引擎，mysql提供默认一个innodb，5.5以前默认myisam
+            Charset：字符集，只对当前自己表有效
+            Collate：校对集
+        字段与表分不开
+
+    1.在数据表名字前面加上数据库名字，用“.”链接  数据库.数据表
+    create table mydatabase.class(
+        name varchar(10)
+    ) ; 
+
+    2.进入数据库，创建表
+    use mydatabase;
+    create table class(
+        name varchar(10)
+    )
+    name varchar(10) --不能超过10个字符
+
+    --使用表选项 指定引擎 字符集 校对集
+    create table student(
+        name varchar(10)
+    )engine [=] innodb/myisam charset utf8;
+
+复制已有表结构
+    从已经存在的表复制一份，只复制结构，如果表有数据不复制
+    基本语法：create table 新表名 like 表名；只要使用数据表.表名，就可以在任何数据库下访问其他数据库的表名
+   
+    --在test数据库下创建一个与teacher一样的表
+    use test；
+    create table teacher like mydatabase2.teachser//从mydatabase2复制teacher表
+</pre>
+
+<h3>显示数据表</h3>
+<pre>
+    每当一张数据表创建，那么就会在对应的数据库下创建一些文件（与存储引擎有关）
+    .frm 结构文件 来自于innodb存储引擎，innodb所有对应的表数据都存储在外部的ibdata中
+    
+    --查看所有表
+    show tables
+    --查看匹配数据表
+    show tables like 'c%'; -- c开头的数据表
+显示表结构
+    显示表中所包含的字段信息（名字，类型，属性）
+    Describe 表名
+    Desc 表名
+    show columns from 表名
+
+    --显示表结构
+    describe class；
+    desc teacher； ！！
+    show columns from student;
+    返回表结构：
+        Field   Type     Null      Key    Default    Extra
+        名字     类型      是否允许空 索引     默认值     额外的属性
+    
+    --查看表创建语句：查看表创建时的语句，此语句看到的结果不是用户之前自己输入的
+    show create table 表名
+
+MySQL中有多种语句结束符
+； 与 \g 表示效果一样，字段在上排横着，下面跟对应的数据
+\G 字段在左侧竖着，数据在右侧横着
+</pre>
+<h3>设置表属性</h3>
+<pre>
+    表属性指的就是表选项：engine charset Collate
+    --修改表选项
+    alter table student charset gbk
+</pre>
+<h3>修改表结构</h3>
+<pre>
+    --数据库中数据表名字通常有前缀：取数据库前两个字母加上下划线
+    --修改表名 rename table student to my_student
+    --新增字段：默认加到表的最后面
+        alter table 表名 add[column] 新字段名 列类型[列属性] [新位置]
+    --给学生表增加age字段
+        alter table my_student add column age int
+
+字段位置：字段想要存放的位置
+First：在某某之前，第一个字段
+After 字段名:放在某个具体的字段之后
+    --增加字段，放到第一个
+    alter table my_student add id int first
+    
+    --修改字段名:必须加类型
+    alter table my_student change age nj int
+
+    --修改字段类型
+    alter table my_student modify name varchar(20)
+
+    --删除字段
+    alter table 表名 drop 字段名
+
+    --删除表名
+    drop table 表名
+    drop table 表1,表2
+</pre>
+</body>
+</html>

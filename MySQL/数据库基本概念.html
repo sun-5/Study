@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        pre{
+            font-size:16px;
+            font-family: 'Microsoft YaHei';
+        }
+    </style>
+</head>
+<body>
+
+ 
+<h3>网络数据库</h3>
+指把数据库技术引入到计算机网络系统中，<br>
+借助于网络技术将存储于数据库中的大量信息及时发布出去，<br>
+而计算机网络借助于成熟的数据库技术对网络中的各种数据进行有效管理，<br>
+并实现用户与网络中的数据库进行实时动态数据交互。<br>
+<h3>层级数据库</h3>
+层次结构模型实质上是一种有根节点的定向有序树（在数学中“树”被定义为一个无回的连通图）<br>
+<h3>关系数据库</h3>
+建立在关系模型基础上的数据库，借助于集合代数等数学概念和方法来处理数据库中的数据。<br>
+
+数据库的另外一种区分方式：基于存储介质<br>
+存储介质：磁盘和内存<br>
+
+关系型数据库：存在磁盘中<br>
+非关系型数据库：存在内存中<br>
+
+<h4>关系型数据库基本概念</h4>
+    关系模型由关系数据结构、关系操作集合、关系完整性约束三部分组成。<br>
+    关系数据结构：指数据以什么方式存储，是一种二维表的形式存储，行、列<br>
+    <table border="1">
+        <tr>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>身高</th>
+          <th>体重</th>
+        </tr>
+        <tr>
+          <td>张三</td>
+          <td>30</td>
+          <td>187</td>
+          <td>70</td>
+        </tr>
+        <tr>
+            <td>李四</td>
+            <td>40</td>
+            <td>175</td>
+            <td>60</td>
+          </tr>
+      </table>
+   <p>关系操作集合：如何关联和管理对应的存储数据，SQL指令</p> 
+    EX：获取张三的年龄：已知条件为姓名<br>
+    select 年龄 from 二维表 where 姓名=张三<br>
+   <p>关系完整性约束：数据内部有对应的关联关系，以及数据与数据之间也有对应的关联关系</p>
+   表内约束：对应的具体列只能放对应的数据（不能乱放）<br>
+   表间约束：自然界各实体都是有着对应的关联关系（外键）<br>
+   <h3>典型关系型数据库</h3>
+   <p>Oracle、DB2、Microsoft SQL Server、Microsoft Access、MySQL、SQLite</p>
+   <p>
+       小型关系型数据库：、Microsoft Access、SQLite<br>
+       中型关系型数据库：SQLServer、MySQL<br>
+       大型关系型数据库：Oracle、DB2<br>
+   </p>
+</body>
+</html>

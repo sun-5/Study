@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        pre{
+            font-size:16px;
+            font-family: 'Microsoft YaHei';
+        }
+    </style>
+</head>
+<body>
+    <h3> MySQL基本介绍 </h3>
+    是一个关系型数据库管理系统<br>
+    开源免费的数据库产品<br>
+    MySQL对PHP支持是最好的<br>
+
+    MySQL中用到的操作指令就是SQL指令<br>
+
+    <h3>启动和停止MySQL服务</h3>
+    是一种C/S结构，客户端和服务端<br>
+    服务端对应的软件MySQL.exe <br>
+    
+    <p>命令行方式</p>
+    通过Windows下打开cmd控制器，然后命令管理<br>
+    Net start MySQL，开启服务<br>
+    Net stop mysql，关闭服务<br>
+    <p>系统服务方式</p>
+    前提：在安装mysql时候将mysql添加到windows服务中去了<br>
+
+    
+<h3>登录和退出MySQL系统</h3>
+<h3>MySQL服务端架构</h3>
+以下几层构成：
+<pre >
+    1.数据库管理系统（最外层）：DBMS，专门管理服务器端的所有内容
+    2.数据库-第二层：DB，专门用户存储数据的仓库，可以有很多个
+    3.二维数据表-第三层，Table，专门用于存储具体实体的数据
+    4.字段-第四层：Field,具体存储某种类型的数据，实际存储单元
+
+    数据库中常用的几个关键字:
+    Row:行
+    Column：列（field）
+</pre>
+
+</body>
+</html>
