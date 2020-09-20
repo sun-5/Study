@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        pre{
+            font-size:16px;
+            font-family: 'Microsoft YaHei';
+        }
+    </style>
+</head>
+<body>
+<h3>
+    字符集
+</h3>
+<h3>
+    字符编码概念
+</h3>
+<pre>
+    字符（Character）是各种文字和符号的总称，包括各国家文字、标点符号、图形符号、数字等
+    字符编码 是计算机针对各种符号，在计算机中的一种二进制存储代号
+</pre>
+<h3>    
+    字符集概念
+</h3>
+<pre>
+    是多个字符的集合，字符集种类较多，每个字符集包含的字符个数不同。
+    常见字符集名称：ASCII字符集、GB2312字符集、BIG5字符集、GB18030字符集、Unicode字符集等
+    对中文字符进行编码，是中文信息交流的技术基础。
+</pre>
+<h3>MySQL字符集设置</h3>
+<pre>
+    --插入中文数据
+    insert into my_teacher values('张三'，34)；//返回错误 中文字符不认识
+</pre>
+<h3>设置客户端所有字符集</h3>
+<pre>
+如果直接通过cmd下的mysql.exe进行中文数据插入，那么可能出错
+出错原因：
+1.用户是通过mysql.exe来操作mysqld.exe
+2.真正的SQL执行是MySQLd.exe 来执行
+3.mysql.exe将数据传入mysqld.exe时候，没有告知其对应的符号规则（字符集），而mysqld也没有能力自己判断，就会使用自己默认的字符集
+
+解决方案：
+mysql.exe客户端在进行数据操作之前将自己所使用的字符集告诉mysqld
+cmd 下 mysql.exe 都默认只有一个字符集：GBK
+
+    --mysql.exe告知mysqld.exe自己的字符集规则
+    set names gbk;
+    insert into my_teacher values('张三'，34)；
+
+深层原理：客户端，服务端，连接层
+client server  connection
+set names 字符集的本质，就是一次性打通三层关系的字符集，变得一致
+在系统中有三个变量来记录着这三个关系对应的字符集：show variables like 'character_set_%';
+
+    --查看系统保存的三种关系处理字符集
+    show variables like 'character_set_%';
+    --修改变量
+    set character_set_client = gbk;//服务器识别客户端传来的数据
+    set character_set_connection = gbk; 连接层  客服端与服务端之间字符集转换
+    set character_set_results = gbk; 服务端返回客户端数据
+</pre>
+
+
+
+
+
+
+</body>
+</html>

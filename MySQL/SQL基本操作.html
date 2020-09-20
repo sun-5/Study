@@ -130,7 +130,7 @@
     show tables
     --查看匹配数据表
     show tables like 'c%'; -- c开头的数据表
-显示表结构
+<h3>显示表结构</h3>
     显示表中所包含的字段信息（名字，类型，属性）
     Describe 表名
     Desc 表名
@@ -170,7 +170,7 @@ MySQL中有多种语句结束符
 First：在某某之前，第一个字段
 After 字段名:放在某个具体的字段之后
     --增加字段，放到第一个
-    alter table my_student add id int first
+    alter table my_student add id int  first
     
     --修改字段名:必须加类型
     alter table my_student change age nj int
@@ -185,5 +185,68 @@ After 字段名:放在某个具体的字段之后
     drop table 表名
     drop table 表1,表2
 </pre>
+<h3>数据基础操作</h3>
+<h3>数据插入操作</h3>
+<pre>
+    本质：将数据以SQL形式存储到指定的数据表（字段）里面
+    基本语法：
+    Insert into 表名(字段列表) values（对应字段列表的值）
+
+    --插入数据导数据表（向表中指定字段插入数据）
+    进入mysql服务，查询有表否
+    create table my_teacher(
+        name varchar(10),
+        age int
+    )charset utf8;
+    insert into my_teacher (name,age) values('Jack',30);
+
+    返回query ok 1 row...说明插入成功
+
+    1.注意：后面 values中对应的致列表，只需要与前面的字段列表相对应即可，不一样与表结构完全一致
+    insert into my_teacher (age,name) values(30,'Jack');
+    2.注意：字段列表并不一定非要有所有的表中字段
+    insert into my_teacher (name) values('Jack');
+
+    --向表中所有字段插入数据
+    insert into 表名 values(对应表结构) //值列表必须与字段列表一致
+    insert into my_teacher  values('Jack',30);
+</pre>
+<h3>数据查询操作</h3>
+<pre>
+   查询表中全部数据：select * from 表名; //*表示匹配所有的字段
+   
+   查询表中部分字段：select 字段列表 from 表名; //字段列表使用逗号','隔开
+   简单条件查询数据：select name from my_teacher where age=30;//mysql中没有==符号
+</pre>
+<h3>数据删除操作</h3>
+<pre>
+    基本语法：
+    delete from 表名 [where 条件]//如果没有where条件，就会删除该表所有数据
+    --删除年龄为30的老师
+    delete from my_teacher where age=30
+
+</pre>
+<h3>数据更新操作</h3>
+<pre>
+    更新：将数据进行修改，通常是修改部分字段数据
+    基本语法：
+    update 表名 set 字段名 = 新值 [where 条件] //如果没有where条件，那么所有表中对应的那个字段都会被修改成统一值
+    --更新年龄Han
+    update my_teacher set age=30 where name='Han';
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
