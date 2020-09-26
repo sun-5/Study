@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        pre{
+            font-size:16px;
+            font-family: 'Microsoft YaHei';
+        }
+    </style>
+</head>
+<body>
+    <h3>
+        列类型
+    </h3>
+    <pre>
+     整数类型：
+        Tinyint：迷你整型，系统采用一个字节来保存的整型，一个字节 = 8 位，最大能表示数值0-255 
+        Smallint：小整形，系统采用两个字节来保存的整型：能表示0-65535之间
+        Mediumint：中整型，采用三个字节保存数据 
+        Int：标准整型，采用四个字节来保存数据
+        Bigint：大整型，采用8个字节来保存数据
+
+    --创建数据表
+    create table my_int(
+        int_1 tinyint,
+        int_2 smallint,
+        int_3 mediumint,
+        int_4 int,
+        int_5 bigint
+    )charset utf8;
+    --插入数据 
+    insert into my_int values(10,10000,100000,1000000,100000000);
+    --插入错误数据（超出数据范围）
+    insert into my_int values(255,255,255,255);//  Out of range
+    insert into my_int values(-128,255,255,255)
+    Tinyint 实际 区间 -128，127
+    
+    实际应用中，应该根据对应的数据的范围来选定对应的整型类型，通常使用的比较多的TINYINT 和 int
+    </pre>
+    <h3>无符号标识设定</h3>
+    <pre>
+        无符号：表示存储的数据在当前字段中，没有负数（只有正数，0-255区间）
+        基本语法：在类型之后加上一个unsigned
+
+    alter table my_int add int_6 tinyint unsigned first;
+    insert into my_int values(255,100,255,255,255,255);
+    insert into my_int values(-100,100,255,255,255,255); 加过unsigned不能放负数
+    </pre>
+    
+</body>
+</html>
