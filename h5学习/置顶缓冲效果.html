@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            width: 100%;
+        }
+
+        .main h1 {
+            margin-bottom: 500px;
+            background: rgb(6, 168, 197);
+        }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+
+        }
+
+        /* 这是针对缺省样式 (必须的) */
+        ::-webkit-scrollbar-track {
+            background-color: #eee;
+        }
+
+        /* 滚动条的滑轨背景颜色 */
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgb(255, 123, 0);
+            min-height: 300px;
+
+            -webkit-border-radius: 8px;
+        }
+
+        /* 滑块颜色 */
+
+
+
+
+        /* 置顶按钮 */
+        .top {
+            display: block;
+            width: 70px;
+            height: 900px;
+            position: fixed;
+            right: 25px;
+            text-align: center;
+            line-height: 50px;
+            color: #fff;
+            background: url(./scroll.png) no-repeat center;
+            transition: all .5s ease-in-out;
+        }
+
+        .fa-float {
+            /* 上下浮动动画 */
+            -webkit-animation: float 2s linear infinite;
+            animation: float 2s linear infinite;
+        }
+
+        @-webkit-keyframes float {
+            0% {
+                transform:translateY(0)
+            }
+
+            25% {
+                transform:translateY(5px)
+            }
+
+            50% {
+                transform:translateY(10px)
+            }
+
+            75% {
+                transform:translateY(5px)
+            }
+
+            100% {
+                transform:translateY(0)
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform:translateY(0)
+            }
+
+            25% {
+                transform:translateY(5px)
+            }
+
+            50% {
+                transform:translateY(10px)
+            }
+
+            75% {
+                transform:translateY(5px)
+            }
+
+            100% {
+                transform:translateY(0)
+            }
+        }
+
+        .scrollbar {
+            height: 5px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #fe9600;
+            transition: all 0.5s ;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h1>第01行</h1>
+        <h1>第02行</h1>
+        <h1>第03行</h1>
+        <h1>第04行</h1>
+        <h1>第05行</h1>
+        <h1>第06行</h1>
+        <h1>第07行</h1>
+        <h1>第08行</h1>
+        <h1>第09行</h1>
+        <h1>第10行</h1>
+    </div>
+
+    <div class="scrollbar"> </div>
+    <a class="top fa-float"> </a>
+    <script>
+        function toPercent(point) {
+            var str = Number(point * 100).toFixed(2);
+            str += "%";
+            return str;
+        }
+        var h = $(document).height(); //获取当前文档页面高度   $(document).height() = $(document).scrollTop()+ $(window).height()
+        $(document).scroll(function () {
+            var sTop = $(document).scrollTop(); //实时获取到滚动条拉动的距离
+            var 
+            if (sTop >= 200) {
+                $('.top').css('top', '-25px'); //一定高度显示置顶按钮
+            } else {
+                $('.top').css('top', '-999px');
+            }
+            $('.scrollbar').width(toPercent(sTop / h));
+        })
+
+
+        $('.top').click(function () {
+            $('html , body').animate({ scrollTop: 0}, 'slow');
+            
+        })
+    </script>
+</body>
+
+</html>
