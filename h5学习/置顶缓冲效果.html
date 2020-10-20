@@ -111,7 +111,7 @@
         }
 
         .scrollbar {
-            height: 5px;
+            height: 3px;
             position: fixed;
             top: 0;
             left: 0;
@@ -143,16 +143,19 @@
             str += "%";
             return str;
         }
-        var h = $(document).height(); //获取当前文档页面高度   $(document).height() = $(document).scrollTop()+ $(window).height()
+       
         $(document).scroll(function () {
+             var h = $(document).height(); //获取当前文档页面高度   $(document).height() = $(document).scrollTop()+ $(window).height()
+             var wh = $(window).height(); //当前窗口高度
+             var sh =  h-wh;//滚到最底部时候离顶部的距离
             var sTop = $(document).scrollTop(); //实时获取到滚动条拉动的距离
-            var 
+          
             if (sTop >= 200) {
                 $('.top').css('top', '-25px'); //一定高度显示置顶按钮
             } else {
                 $('.top').css('top', '-999px');
             }
-            $('.scrollbar').width(toPercent(sTop / h));
+            $('.scrollbar').width(toPercent(sTop/sh));
         })
 
 
