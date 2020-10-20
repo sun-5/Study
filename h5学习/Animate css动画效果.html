@@ -8,7 +8,7 @@
     <script src="./jquery.min.js"></script>
     <style>
         *{margin: 0;padding: 0;list-style: none;}
-        .header{width: 100%;height:900px;background-color: #9a9a9a;}
+        .header{width: 100%;height:900px;background-color: #9a9a9a;text-align: center;padding-top: 20px;overflow: hidden;}
         .main{
             width: 400px;
             margin: 0 auto;
@@ -33,18 +33,27 @@
              visibility: hidden;
              /* 先占位隐藏 不可见 但位置大小在*/
              animation-duration: 1.2s;  
-            animation-delay: .2s;   
+            animation-delay: .5s;   
             /* animation-iteration-count: 3;    */
          }
         
          .issee{ visibility: visible!important;}
          .top{width: 50px;height: 50px;position: fixed;right: 25px;bottom: 50px;background:#a4d;line-height: 50px;text-align: center;}
          .foot{width: 100%;height: 150px;background: #ccc;}
+         h1{color: #fff;font-size: 30px;font-weight: bold;margin-bottom: 30px;}
     </style>
 </head>
 <body>
     <div class="header">
-
+        <h1 class="animated fadeInDown" style="animation-delay: .5s; ">fadeInDown</h1>
+        <h1 class="animated fadeInLeft" style="animation-delay: 1s; ">fadeInLeft</h1>
+        <h1 class="animated fadeInLeftBig" style="animation-delay: 1.5s; ">fadeInLeftBig</h1>
+        <h1 class="animated bounceInRight" style="animation-delay: 2s; ">bounceInRight</h1>
+        <h1 class="animated rubberBand" style="animation-delay: 2.5s; ">rubberBand</h1>
+        <h1 class="animated swing" style="animation-delay: 3s; ">swing</h1>
+        <h1 class="animated bounceOutLeft" style="animation-delay: 3.5s; ">bounceOutLeft</h1>
+        <h1 class="animated fadeOutRightBig" style="animation-delay: 4s; ">fadeOutRightBig</h1>
+        <h1 class="animated flipInY" style="animation-delay: 4.5s; ">flipInY</h1>
     </div>
     <div class="main">
         <ul>
@@ -66,7 +75,11 @@
            h= $(document).scrollTop()+$(window).height();//视窗高度+滚动距离  如果大于元素顶部位置， 元素以动画效果显示出来
            $(".main ul>li").each(i => {
                 if(h> $(".main ul>li").eq(i).offset().top){
-                    $(".main ul>li").eq(i).addClass("issee bounceInLeft");
+                    $(".main ul>li").eq(i).addClass("issee fadeInRight");
+                 
+              }else{
+                // $(".main ul>li").eq(i).removeClass("issee fadeInRight");  可有可无
+               
               }
             });
             
