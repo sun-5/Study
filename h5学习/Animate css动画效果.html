@@ -8,27 +8,72 @@
     <script src="./jquery.min.js"></script>
     <style>
         *{margin: 0;padding: 0;list-style: none;}
-        .b1{
-            background:#a46;
-            width: 300px;
-            height: 100px;
+        .header{width: 100%;height:900px;background-color: #9a9a9a;}
+        .main{
+            width: 400px;
+            margin: 0 auto;
+            
+            
         }
-        .b2{
-            background:#ff8;
-            width: 300px;
-            height: 100px;
-        }
+        .main ul{padding: 10px;}
+         .main ul::after{clear: both;display: block;content: "";}
+         .main ul li{
+             width: 100%;
+             height: 150px;
+             float: left;
+             background: rgb(236, 177, 13);
+             box-shadow: 6px 5px 4px 0px #9a9a9a;
+             margin-bottom: 20px;
+             border-radius: 20px;
+             text-align: center;
+             font-size: 30px;
+             font-weight: bold;
+             line-height: 150px;
+             color: azure;
+             visibility: hidden;
+             /* 先占位隐藏 不可见 但位置大小在*/
+             animation-duration: 1.2s;  
+            animation-delay: .2s;   
+            /* animation-iteration-count: 3;    */
+         }
+        
+         .issee{ visibility: visible!important;}
+         .top{width: 50px;height: 50px;position: fixed;right: 25px;bottom: 50px;background:#a4d;line-height: 50px;text-align: center;}
+         .foot{width: 100%;height: 150px;background: #ccc;}
     </style>
 </head>
 <body>
-    <div class="b1">
+    <div class="header">
 
     </div>
-    <div class="b2">
+    <div class="main">
+        <ul>
+           <li class="animated " id="aa">01</li>
+           <li class="animated " id="aa">02</li>
+           <li class="animated "id="aa">03</li>
+           <li class="animated "id="aa">04</li>
+           <li class="animated "id="aa">05</li>
+           <li class="animated "id="aa">06</li>
+        </ul>
+         
+    </div>
+    <div class="foot">
 
     </div>
+ <a   class="top">置顶</a>
     <script>
-        $(function(){
+        $(document).scroll(function(){
+           h= $(document).scrollTop()+$(window).height();//视窗高度+滚动距离  如果大于元素顶部位置， 元素以动画效果显示出来
+           $(".main ul>li").each(i => {
+                if(h> $(".main ul>li").eq(i).offset().top){
+                    $(".main ul>li").eq(i).addClass("issee bounceInLeft");
+              }
+            });
+            
+            
+        })
+        $('.top').click(function () {
+            $('html , body').animate({ scrollTop: 0}, 'fast');
             
         })
     </script>
