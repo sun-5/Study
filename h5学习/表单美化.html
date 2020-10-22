@@ -14,7 +14,7 @@
             font-size: 16px;
         }
 
-        .container {
+        .form-container {
             padding: 20px;
             width: 500px;
             margin: 50px auto 0;
@@ -58,7 +58,7 @@
 
         .input-block {
             margin-left: 80px;
-            height: 40px;
+            min-height: 40px;
         }
 
         select {
@@ -98,6 +98,7 @@
 
         .select-options {
             cursor: pointer;
+            z-index: 99;
         }
 
         .select-options .select-tips {
@@ -131,13 +132,15 @@
         }
 
         label.selected span,
-        label.selected span:hover {
+        label.selected:hover span {
             background: #5FB878;
         }
-        label.selected i{
-            color:#5FB878 ;
+
+        label.selected i svg,
+        label.selected:hover i svg {
+            fill: #5FB878;
         }
-       
+
         .select-form dl dd {
             line-height: 40px;
             padding: 0 10px;
@@ -163,8 +166,12 @@
             border-radius: 2px 0 0 2px;
         }
 
-        .check-label span:hover {
+        .check-label:hover span {
             background: #bbb;
+        }
+
+        .check-label:hover i svg {
+            fill: #ccc;
         }
 
         .check-label i {
@@ -181,9 +188,105 @@
             text-align: center;
             line-height: 40px;
         }
-        .check-label i svg{
+
+        .check-label i svg {
             width: 20px;
             height: 20px;
+            fill: none;
+        }
+
+        .switch-label {
+            display: inline-block;
+            border: 1px solid #ccc;
+            line-height: 25px;
+            box-sizing: border-box;
+            padding: 0 5px;
+            border-radius: 15px;
+            position: relative;
+            margin-top: 6px;
+            width: 60px;
+            height: 28px;
+
+        }
+
+        .switch-label em {
+            font-size: 14px;
+            font-style: normal;
+            position: absolute;
+            right: 5px;
+            color: #848484;
+            top: 0px;
+            line-height: 28px;
+        }
+
+        .switch-label i {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #ccc;
+            display: inline-block;
+            top: 5px;
+            left: 5px;
+            transition: .1s linear;
+        }
+
+        .switch-block label.selected {
+            background: #5FB878;
+        }
+
+        .switch-block label.selected i {
+            background: #fff;
+            margin-left: -22px;
+            left: 100%;
+        }
+
+        .switch-block label.selected em {
+            color: #fff;
+            left: 5px;
+        }
+
+        .textarea {
+            width: 100%;
+            min-height: 100px;
+            height: auto;
+            line-height: 20px;
+            padding: 6px 10px;
+            resize: vertical;
+        }
+
+        .textarea:focus {
+            border: 1px solid #ccc;
+        }
+
+        button {
+            border: 1px solid #ccc;
+            outline: none;
+            background: #ffffff;
+            width: 120px;
+            line-height: 40px;
+        }
+
+        .submit {
+            color: #fff;
+            background: #2d9858;
+        }
+
+        .submit:hover {
+            background: #3bb36b;
+        }
+
+        .reset:hover {
+            border: 1px solid #3bb36b;
+        }
+        .alertBox{
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin:-100px 0 0 -150px;
         }
     </style>
     <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.0.0/jquery.min.js"></script>
@@ -191,8 +294,8 @@
 </head>
 
 <body>
-    <div class="container">
-        <form class='form' action="">
+    <div class="form-container">
+        <form class='form' action="" name="fm">
             <div class="item">
                 <label class="form-label" for="entry">输入框</label>
                 <div class="input-block">
@@ -240,32 +343,32 @@
             </div>
             <div class="item">
                 <label class="form-label">复选框</label>
-                <div class="input-block">
+                <div class="input-block fuxuan">
+                    <input type="checkbox" name="write" id="write" title="写作">
                     <label for="write" class="check-label">
-                        <input type="checkbox" name="write" id="write" title="写作">
                         <span>写作</span>
                         <i><svg t="1603352878025" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" p-id="3055"  fill="#000"  >
+                                xmlns="http://www.w3.org/2000/svg" p-id="3055" fill="#000">
                                 <path
                                     d="M292.159548 475.677746l135.289266 268.954545c0 0 219.840964-546.56933 566.505381-728.771045-8.460696 130.127709-42.274826 242.934938 16.907065 381.723911C858.666976 432.301843 545.812595 822.685995 444.354855 1013.58479 300.62229 831.383074 131.519917 692.558285 13.137717 649.181359L292.159548 475.677746z"
                                     p-id="3056"></path>
                             </svg></i>
                     </label>
-                    <label for="music" class="check-label">
-                        <input type="checkbox" name="music" id="music" title="音乐">
+                    <input type="checkbox" name="music" id="music" title="音乐" checked>
+                    <label for="music" class="check-label selected">
                         <span>音乐</span>
                         <i><svg t="1603352878025" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" p-id="3055"  fill="#000"  >
+                                xmlns="http://www.w3.org/2000/svg" p-id="3055" fill="#000">
                                 <path
                                     d="M292.159548 475.677746l135.289266 268.954545c0 0 219.840964-546.56933 566.505381-728.771045-8.460696 130.127709-42.274826 242.934938 16.907065 381.723911C858.666976 432.301843 545.812595 822.685995 444.354855 1013.58479 300.62229 831.383074 131.519917 692.558285 13.137717 649.181359L292.159548 475.677746z"
                                     p-id="3056"></path>
                             </svg></i>
                     </label>
+                    <input type="checkbox" name="game" id="game" title="写作">
                     <label for="game" class="check-label">
-                        <input type="checkbox" name="game" id="game" title="写作">
                         <span>游戏</span>
                         <i><svg t="1603352878025" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" p-id="3055"  fill="#000"  >
+                                xmlns="http://www.w3.org/2000/svg" p-id="3055" fill="#000">
                                 <path
                                     d="M292.159548 475.677746l135.289266 268.954545c0 0 219.840964-546.56933 566.505381-728.771045-8.460696 130.127709-42.274826 242.934938 16.907065 381.723911C858.666976 432.301843 545.812595 822.685995 444.354855 1013.58479 300.62229 831.383074 131.519917 692.558285 13.137717 649.181359L292.159548 475.677746z"
                                     p-id="3056"></path>
@@ -274,9 +377,27 @@
                 </div>
             </div>
             <div class="item">
-
+                <label class="form-label">开关</label>
+                <div class="input-block switch-block">
+                    <label for="switch" class="switch-label ">
+                        <input type="checkbox" name="switch" id="switch">
+                        <em>OFF</em>
+                        <i></i>
+                    </label>
+                </div>
             </div>
-
+            <div class="item">
+                <label class="form-label" for="textarea">文本域</label>
+                <div class="input-block">
+                    <input id="textarea" name="textarea" type="textarea" class="textarea" placeholder="请输入文本">
+                </div>
+            </div>
+            <div class="item">
+                <div class="input-block">
+                    <button type="submit" class="submit">立即提交</button>
+                    <button type="reset" class="reset">重置</button>
+                </div>
+            </div>
         </form>
     </div>
     <script>
@@ -291,14 +412,43 @@
             }
         })
         //对应选项加上背景色,并显示在选择框
-        $('.select-options dd').click(function () {
+        $('.select-options dd').click(function (e) {
             //选中的增加样式，其他的删除样式
-            $(this).addClass("select-this").siblings().removeClass("select-this");
-            $('.select-title input').val($(this).html()); //选中的文字附加给input
-            let i = $(this).index(); //获取选项索引，对应给option添加selected属性
+            $(e.target).addClass("select-this").siblings().removeClass("select-this");
+            $('.select-title input').val($(e.target).html()); //选中的文字附加给input
+            let i = $(e.target).index(); //获取选项索引，对应给option添加selected属性
             $('.input-block select option').eq(i).attr('selected', "selected").siblings().removeAttr(
                 'selected'); //其他标签删除选中属性
         })
+        $('.fuxuan label').click(function (e) {
+            //如果有样式，点击后删除，没有的话 点击后增加
+            if ($(e.currentTarget).hasClass('selected')) {
+                $(e.currentTarget).removeClass("selected");
+            } else {
+                $(e.currentTarget).addClass("selected");
+            }
+
+        })
+        // 阻止冒泡事件
+        $('input[type=checkbox]').click(function (e) {
+            e.stopPropagation();
+        })
+        $('.switch-block .switch-label').click(function (e) {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass("selected");
+                $(this).find("em").html('OFF');
+            } else {
+                $(this).addClass("selected");
+                $(this).find("em").html('ON');
+            }
+        })
+        //打印表单值
+        $('.submit').click(function () {
+            var formData = $('form').serialize();
+            formData = decodeURI(formData,true);//一次转码
+            alert(formData);
+        })
+
     </script>
 </body>
 
