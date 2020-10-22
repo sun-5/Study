@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单复选框和单选框美化</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .container {
+            padding: 20px;
+            width: 500px;
+            margin: 50px auto 0;
+            border: 1px solid #ccc;
+        }
+
+        .item {
+            clear: both;
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            float: left;
+            display: block;
+            line-height: 40px;
+            width: 80px;
+        }
+
+        input {
+            height: 40px;
+            box-sizing: border-box;
+            display: block;
+            line-height: 40px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            padding-left: 10px;
+        }
+
+        input:focus {
+            outline: none;
+            border: 1px solid red;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        .title {
+            width: 100%;
+        }
+
+        .input-block {
+            margin-left: 80px;
+            height: 40px;
+        }
+
+        select {
+            display: none;
+        }
+
+        .select-form {
+            position: relative;
+        }
+
+        .select-title input:focus {
+            outline: none;
+            border: 1px solid #949494;
+            cursor: pointer;
+        }
+
+        .select-title input {
+            width: 100%;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+
+        .select-title i {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            transform: rotate(180deg);
+            transition: all 0.2s ease;
+        }
+
+        .select-title i svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .select-options {
+            cursor: pointer;
+        }
+
+        .select-options .select-tips {
+            color: #aaa;
+        }
+
+        .select-options dd:hover {
+            background: #eee;
+        }
+
+        .select-options dd.select-this {
+            background: #5FB878;
+            color: #fff;
+        }
+
+        .select-form dl {
+            display: none;
+            padding: 5px 0;
+            border: 1px solid #d2d2d2;
+            position: absolute;
+            top: 44px;
+            left: 0;
+            width: 100%;
+            border-radius: 5px;
+            background: #fff;
+            box-shadow: 0px 0px 4px 0px #e0e0e0;
+        }
+
+        .selected dl {
+            display: block;
+        }
+
+        label.selected span,
+        label.selected span:hover {
+            background: #5FB878;
+        }
+        label.selected i{
+            color:#5FB878 ;
+        }
+       
+        .select-form dl dd {
+            line-height: 40px;
+            padding: 0 10px;
+        }
+
+        .check-label {
+            display: inline-block;
+            position: relative;
+            padding-right: 30px;
+            margin-right: 15px;
+            font-size: 0;
+            margin-top: 2.5px;
+        }
+
+        .check-label span {
+            line-height: 35px;
+            padding: 0 10px;
+            color: #fff;
+            background: #ccc;
+            overflow: hidden;
+            height: 100%;
+            display: inline-block;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .check-label span:hover {
+            background: #bbb;
+        }
+
+        .check-label i {
+            width: 30px;
+            height: 33px;
+            display: inline-block;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            border: 1px solid #d2d2d2;
+            border-left: none;
+            border-radius: 0 2px 2px 0;
+            font-size: 20px;
+            text-align: center;
+            line-height: 40px;
+        }
+        .check-label i svg{
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+    <script src="https://s3.pstatp.com/cdn/expire-1-M/jquery/3.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="./animate.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <form class='form' action="">
+            <div class="item">
+                <label class="form-label" for="entry">输入框</label>
+                <div class="input-block">
+                    <input id="entry" name="entry" type="text" class="title" placeholder="请输入标题">
+                </div>
+            </div>
+            <div class="item">
+                <label class="form-label" for="password">密码框</label>
+                <div class="input-block">
+                    <input id="password" name="password" type="password" class="password" placeholder="请输入密码">
+                </div>
+            </div>
+            <div class="item">
+                <label class="form-label">选择框</label>
+                <div class="input-block">
+                    <select name="city">
+                        <option value="">请选择</option>
+                        <option value="0">北京</option>
+                        <option value="1">上海</option>
+                        <option value="2">广州</option>
+                        <option value="3">深圳</option>
+                        <option value="4">杭州</option>
+                    </select>
+                    <div class="select-form ">
+                        <div class="select-title">
+                            <input type="text" readonly value placeholder="请选择">
+                            <i><svg t="1603339137916" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" p-id="6312">
+                                    <path
+                                        d="M62.95755494 710.07148653L950.87052464 710.07148652l-443.95648465-442.49526047z"
+                                        fill="#ccc" p-id="6313"></path>
+                                </svg></i>
+                        </div>
+                        <dl class="select-options fadeInUp animated" style="animation-duration: 0.5s;">
+                            <dd value="" class="select-tips select-this">请选择</dd>
+                            <dd value="0">北京</dd>
+                            <dd value="1">上海</dd>
+                            <dd value="2">广州</dd>
+                            <dd value="3">深圳</dd>
+                            <dd value="4">杭州</dd>
+                        </dl>
+
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <label class="form-label">复选框</label>
+                <div class="input-block">
+                    <label for="write" class="check-label">
+                        <input type="checkbox" name="write" id="write" title="写作">
+                        <span>写作</span>
+                        <i><svg t="1603352878025" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="3055"  fill="#000"  >
+                                <path
+                                    d="M292.159548 475.677746l135.289266 268.954545c0 0 219.840964-546.56933 566.505381-728.771045-8.460696 130.127709-42.274826 242.934938 16.907065 381.723911C858.666976 432.301843 545.812595 822.685995 444.354855 1013.58479 300.62229 831.383074 131.519917 692.558285 13.137717 649.181359L292.159548 475.677746z"
+                                    p-id="3056"></path>
+                            </svg></i>
+                    </label>
+                    <label for="music" class="check-label">
+                        <input type="checkbox" name="music" id="music" title="音乐">
+                        <span>音乐</span>
+                        <i><svg t="1603352878025" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="3055"  fill="#000"  >
+                                <path
+                                    d="M292.159548 475.677746l135.289266 268.954545c0 0 219.840964-546.56933 566.505381-728.771045-8.460696 130.127709-42.274826 242.934938 16.907065 381.723911C858.666976 432.301843 545.812595 822.685995 444.354855 1013.58479 300.62229 831.383074 131.519917 692.558285 13.137717 649.181359L292.159548 475.677746z"
+                                    p-id="3056"></path>
+                            </svg></i>
+                    </label>
+                    <label for="game" class="check-label">
+                        <input type="checkbox" name="game" id="game" title="写作">
+                        <span>游戏</span>
+                        <i><svg t="1603352878025" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="3055"  fill="#000"  >
+                                <path
+                                    d="M292.159548 475.677746l135.289266 268.954545c0 0 219.840964-546.56933 566.505381-728.771045-8.460696 130.127709-42.274826 242.934938 16.907065 381.723911C858.666976 432.301843 545.812595 822.685995 444.354855 1013.58479 300.62229 831.383074 131.519917 692.558285 13.137717 649.181359L292.159548 475.677746z"
+                                    p-id="3056"></path>
+                            </svg></i>
+                    </label>
+                </div>
+            </div>
+            <div class="item">
+
+            </div>
+
+        </form>
+    </div>
+    <script>
+        //点击下拉，显示下拉列表
+        $('.select-form').click(function () {
+            if ($(this).hasClass('selected')) {
+                $('.select-title i').css('transform', ' rotate(180deg)');
+                $(this).removeClass("selected");
+            } else {
+                $('.select-title i').css('transform', ' rotate(0deg)');
+                $(this).addClass("selected");
+            }
+        })
+        //对应选项加上背景色,并显示在选择框
+        $('.select-options dd').click(function () {
+            //选中的增加样式，其他的删除样式
+            $(this).addClass("select-this").siblings().removeClass("select-this");
+            $('.select-title input').val($(this).html()); //选中的文字附加给input
+            let i = $(this).index(); //获取选项索引，对应给option添加selected属性
+            $('.input-block select option').eq(i).attr('selected', "selected").siblings().removeAttr(
+                'selected'); //其他标签删除选中属性
+        })
+    </script>
+</body>
+
+</html>
